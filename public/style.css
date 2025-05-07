@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 :root {
+  --blue-stone-200: #b0dfda;
   --blue-stone-400: #56aba9;
   --blue-stone-600: #2e7273;
   --color-1: #7e7e7e;
@@ -9,10 +10,14 @@
 body {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
+  line-height: 100%;
+  letter-spacing: 0;
 }
 
 p,
-h1 {
+h1,
+h2,
+h3 {
   margin: 0px;
 }
 
@@ -20,22 +25,16 @@ h1 {
 .bold-4 {
   font-weight: 700;
   font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0;
 }
 
 .extra-bold-1 {
   font-weight: 800;
   font-size: 35px;
-  line-height: 100%;
-  letter-spacing: 0;
 }
 
 .extra-bold-2 {
   font-weight: 800;
   font-size: 13px;
-  line-height: 100%;
-  letter-spacing: 0;
 }
 
 /* Color */
@@ -49,6 +48,14 @@ h1 {
 
 .color-1 {
   color: var(--color-1);
+}
+
+.bg-blue-stone-200 {
+  background-color: var(--blue-stone-200);
+}
+
+.bg-blue-stone-600 {
+  background-color: var(--blue-stone-600);
 }
 
 .btn-blue-stone-600 {

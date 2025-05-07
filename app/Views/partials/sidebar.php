@@ -52,19 +52,19 @@
     </div>
 
     <div class="submenu-wrapper">
-        <div role="button" class="submenu bold-4">
-            <img src="<?= base_url('/img/dashboard-active.png') ?>" alt="dashboard" width="29">
+        <a href="<?= base_url('/dashboard') ?>" class="submenu bold-4" style="text-decoration: none;">
+            <img src="<?= $active_menu === 'dashboard' ? base_url('/img/dashboard-active.png') : base_url('/img/dashboard.png') ?>" alt="dashboard" width="29">
 
-            <span class="blue-stone-600">Dashboard</span>
-        </div>
+            <span class="<?= $active_menu === 'dashboard' ? 'blue-stone-600' : 'color-1' ?>">Dashboard</span>
+        </a>
 
         <hr class="submenu-hr">
 
-        <div role="button" class="submenu bold-4">
-            <img src="<?= base_url('/img/gavel.png') ?>" alt="gavel" width="29">
+        <a href="<?= base_url('/legal-cases') ?>" class="submenu bold-4" style="text-decoration: none;">
+            <img src="<?= $active_menu === 'legal_cases' ? base_url('/img/gavel-active.png') : base_url('/img/gavel.png') ?>" alt="gavel" width="29">
 
-            <span class="color-1">Identitas Perkara</span>
-        </div>
+            <span class="<?= $active_menu === 'legal_cases' ? 'blue-stone-600' : 'color-1' ?>">Identitas Perkara</span>
+        </a>
     </div>
 
     <div class="menu extra-bold-2">

@@ -79,7 +79,7 @@ Login
             error: function(xhr, status, error) {
                 console.log("AJAX error:", error);
             }
-        })
+        });
     });
 </script>
 <?= $this->endSection() ?>

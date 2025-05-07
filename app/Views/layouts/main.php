@@ -12,13 +12,13 @@
 
 <body>
     <div class="container-fluid p-0 vh-100">
-        <div class="d-flex">
+        <div class="d-flex h-100">
             <div style="width: 19.5rem;">
                 <?= $this->include('partials/sidebar') ?>
             </div>
 
-            <div class="flex-fill">
-                <div class="d-flex flex-column">
+            <div class="flex-fill overflow-hidden">
+                <div class="d-flex flex-column h-100 overflow-auto">
                     <?= $this->include('partials/navbar') ?>
 
                     <?= $this->renderSection('content') ?>
