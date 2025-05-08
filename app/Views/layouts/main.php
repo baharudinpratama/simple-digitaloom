@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $this->renderSection('page_title') ?? 'SIMPLE' ?></title>
+    <title><?= $page_title ?? 'SIMPLE' ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= base_url('/style.css') ?>">
     <?= $this->renderSection('styles') ?>
@@ -13,7 +13,7 @@
 <body>
     <div class="container-fluid p-0 vh-100">
         <div class="d-flex h-100">
-            <div style="width: 19.5rem;">
+            <div style="min-width: 19.5rem;">
                 <?= $this->include('partials/sidebar') ?>
             </div>
 

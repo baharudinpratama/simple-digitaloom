@@ -3,7 +3,9 @@
 :root {
   --blue-stone-200: #b0dfda;
   --blue-stone-400: #56aba9;
+  --blue-stone-500: #3c908f;
   --blue-stone-600: #2e7273;
+  --blue-stone-800: #24494b;
   --color-1: #7e7e7e;
 }
 
@@ -42,7 +44,7 @@ h3 {
   border-color: #c3c3c3;
 }
 
-.blue-stone-600 {
+.text-blue-stone-600 {
   color: var(--blue-stone-600);
 }
 
@@ -54,8 +56,16 @@ h3 {
   background-color: var(--blue-stone-200);
 }
 
+.bg-blue-stone-500 {
+  background-color: var(--blue-stone-500);
+}
+
 .bg-blue-stone-600 {
   background-color: var(--blue-stone-600);
+}
+
+.bg-blue-stone-800 {
+  background-color: var(--blue-stone-800);
 }
 
 .btn-blue-stone-600 {

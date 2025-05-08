@@ -24,7 +24,7 @@ Login
     <div class="container h-100 d-flex align-items-center">
         <div class="mx-auto login-container border-card">
             <div class="d-flex flex-column gap-3">
-                <h1 class="extra-bold-1 blue-stone-600">Login</h1>
+                <h1 class="extra-bold-1 text-blue-stone-600">Login</h1>
                 <p class="">Selamat Datang di Web Super Admin SIMPLE</p>
             </div>
 

@@ -14,13 +14,24 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="container-fluid d-flex flex-column" style="padding: 68px 18px 0px 32px; gap: 67px;">
+<div class="container-fluid d-flex flex-column" style="padding: 68px 18px 68px 32px; gap: 67px;">
     <div class="w-100 case-card">
         <div class="h-100 d-flex flex-column justify-content-between text-white fw-bold">
             <h2 style="font-size: 35px;">Total Perkara</h2>
             <p style="font-size: 25px;"><span style="font-size: 70px;">190</span> Perkara</p>
         </div>
     </div>
+
+    <?php if (session()->has('flash_message')) : ?>
+        <div class="alert alert-dismissible bg-blue-stone-800 " data-bs-theme="dark" style="min-height: 98px; margin: 0px; padding: 40px; border-radius: 10px;" role="alert">
+            <div class="d-flex align-items-center h-100 text-white" style="gap: 10px;">
+                <img src="<?= base_url('/img/check-rounded.svg') ?>" alt="check-rounded" width="25">
+                <?= session()->get('flash_message') ?>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php session()->remove('flash_message'); ?>
+    <?php endif; ?>
 
     <div class="d-flex flex-column" style="border-radius: 10px; border: 2px solid #c3c3c3;">
         <div class="d-flex justify-content-between align-items-center" style="padding: 49px 36px;">

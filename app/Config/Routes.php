@@ -16,4 +16,5 @@ $routes->get('/logout', 'Auth::logout');
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/legal-cases', 'LegalCase::index');
 $routes->get('/legal-cases/create', 'LegalCase::create');
+$routes->post('/legal-cases/store', 'LegalCase::store');
 $routes->get('/legal-cases/(:num)', 'LegalCase::show');

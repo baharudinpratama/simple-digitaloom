@@ -17,14 +17,17 @@ class Auth extends BaseController
     {
         $session = session();
         $model = new UserModel();
+
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
         $user = $model->where('username', $username)->first();
         if ($user && password_verify($password, $user['password'])) {
             $session->set([
-                'isLoggedIn' => true,
+                'is_logged_in' => true,
+                'id' => $user['id'],
                 'username' => $username,
+                'name' => $user['name'],
                 'role' => $user['role']
             ]);
             return $this->response->setJSON([

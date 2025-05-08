@@ -12,7 +12,7 @@ class LegalCaseModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['case_number, case_date, case_subject, court, pic'];
+    protected $allowedFields    = ['case_number', 'case_type', 'court_location', 'court', 'case_date', 'case_description', 'case_subject', 'case_summary', 'compensation_claim', 'pic'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

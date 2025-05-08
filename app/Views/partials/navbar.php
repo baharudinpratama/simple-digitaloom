@@ -39,7 +39,7 @@
                 <div class="d-flex align-items-center" style="gap: 18px;">
                     <img src="<?= base_url('/img/user-default.png') ?>" alt="profile-picture" class="img-fluid rounded-full" width="45">
 
-                    <p>Profil Akun</p>
+                    <p><?= session()->name ?></p>
                 </div>
 
                 <hr class="navbar-profile-hr">
