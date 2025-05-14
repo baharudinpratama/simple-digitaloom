@@ -13,8 +13,8 @@
 </style>
 
 <div class="d-flex justify-content-between align-items-center w-100 navbar-wrapper">
-    <div class="d-flex flex-column">
-        <h1 style="padding-bottom: 16px;"><?= esc($page_title) ?></h1>
+    <div class="d-flex flex-column color-1">
+        <h1 class="extra-bold-3 color-text" style="padding-bottom: 16px;"><?= esc($page_title) ?></h1>
 
         <div class="d-flex align-items-center" style="gap: 7px;">
             <?php foreach ($breadcrumb as $crumb) : ?>

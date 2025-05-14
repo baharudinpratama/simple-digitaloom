@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Auth extends BaseController
+class AuthController extends BaseController
 {
     public function login()
     {
@@ -15,7 +15,6 @@ class Auth extends BaseController
 
     public function loginPost()
     {
-        $session = session();
         $model = new UserModel();
 
         $username = $this->request->getPost('username');
@@ -23,7 +22,7 @@ class Auth extends BaseController
 
         $user = $model->where('username', $username)->first();
         if ($user && password_verify($password, $user['password'])) {
-            $session->set([
+            session()->set([
                 'is_logged_in' => true,
                 'id' => $user['id'],
                 'username' => $username,
@@ -31,12 +30,12 @@ class Auth extends BaseController
                 'role' => $user['role']
             ]);
             return $this->response->setJSON([
-                'status' => 'success',
+                'success' => true,
                 'message' => 'Login berhasil.'
             ]);
         } else {
             return $this->response->setJSON([
-                'status' => 'error',
+                'success' => false,
                 'message' => 'Username atau password salah.'
             ]);
         }

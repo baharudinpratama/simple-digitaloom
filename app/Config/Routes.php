@@ -8,13 +8,39 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 // Auth
-$routes->get('/login', 'Auth::login');
-$routes->post('/login', 'Auth::loginPost');
-$routes->get('/logout', 'Auth::logout');
+$routes->get('/login', 'AuthController::login');
+$routes->post('/login', 'AuthController::loginPost');
+
+$routes->get('/logout', 'AuthController::logout');
 
 // Main
-$routes->get('/dashboard', 'Dashboard::index');
-$routes->get('/legal-cases', 'LegalCase::index');
-$routes->get('/legal-cases/create', 'LegalCase::create');
-$routes->post('/legal-cases/store', 'LegalCase::store');
-$routes->get('/legal-cases/(:num)', 'LegalCase::show');
+$routes->get('/dashboard', 'DashboardController::index');
+
+$routes->get('/cases', 'CaseController::index');
+$routes->get('/cases/create', 'CaseController::create');
+$routes->post('/cases', 'CaseController::store');
+$routes->get('/cases/(:num)', 'CaseController::show/$1');
+
+$routes->get('/manage-cases', 'ManageCaseController::index');
+$routes->get('/manage-cases/(:num)', 'ManageCaseController::show/$1');
+$routes->post('/manage-cases/update', 'ManageCaseController::update');
+
+$routes->get('/manage-cases/(:num)/data', 'CaseDataController::indexByCase/$1');
+$routes->post('/case-data', 'CaseDataController::store');
+$routes->post('/case-data/update', 'CaseDataController::update');
+$routes->post('/case-data/delete', 'CaseDataController::delete');
+
+$routes->get('/manage-cases/(:num)/parties', 'CasePartyController::indexByCase/$1');
+$routes->post('/case-parties', 'CasePartyController::store');
+$routes->post('/case-parties/update', 'CasePartyController::update');
+$routes->post('/case-parties/delete', 'CasePartyController::delete');
+
+$routes->get('/manage-cases/(:num)/objects', 'CaseObjectController::indexByCase/$1');
+$routes->post('/case-objects', 'CaseObjectController::store');
+$routes->post('/case-objects/update', 'CaseObjectController::update');
+$routes->post('/case-objects/delete', 'CaseObjectController::delete');
+
+$routes->get('/manage-cases/(:num)/agendas', 'CaseAgendaController::indexByCase/$1');
+$routes->post('/case-agendas', 'CaseAgendaController::store');
+$routes->post('/case-agendas/update', 'CaseAgendaController::update');
+$routes->post('/case-agendas/delete', 'CaseAgendaController::delete');

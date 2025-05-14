@@ -6,9 +6,13 @@
         height: 332px;
         padding: 56px 45px;
         border-radius: 10px;
-        background-image: url("<?= base_url('/img/bg-legal-cases.png') ?>");
+        background-image: url("<?= base_url('/img/bg-cases.png') ?>");
         background-size: cover;
         background-repeat: no-repeat;
+    }
+
+    label {
+        font-weight: 700;
     }
 </style>
 <?= $this->endSection() ?>
@@ -18,15 +22,15 @@
     <div class="d-flex flex-column" style="margin-bottom: 40px; padding: 47px 74px; border-radius: 10px; border: 2px solid #c3c3c3;">
         <div class="d-flex align-items-center" style="gap: 38px;">
             <div style="padding: 20px 24px; border-radius: 10px; background-color: var(--blue-stone-500);">
-                <img src="<?= base_url('/img/information.png') ?>" alt="information" width="43">
+                <img src="<?= base_url('/img/information.png') ?>" alt="information" width="52">
             </div>
 
-            <h3>Informasi Perkara</h3>
+            <h2 class="extra-bold-5 text-blue-stone-600">Informasi Perkara</h2>
         </div>
     </div>
 
     <div class="d-flex flex-column" style="padding: 60px 57px; gap: 78px; border-radius: 10px; border: 2px solid #c3c3c3;">
-        <h3>Informasi Perkara</h3>
+        <h3 class="extra-bold-4 text-blue-stone-600">Informasi Perkara</h3>
 
         <div class="row row-cols-2" style="--bs-gutter-x: 70px; --bs-gutter-y: 40px;">
             <div class="col">
@@ -38,7 +42,9 @@
                 <label for="case-type" class="form-label" style="margin-bottom: 18px;">Jenis Perkara</label>
                 <select class="form-select" id="case-type" aria-label="Select case type">
                     <option selected>Pilih Jenis Perkara</option>
-                    <option value="1">Perdata</option>
+                    <?php foreach ($case_types as $case_type) : ?>
+                        <option value="<?= $case_type['id'] ?>"><?= $case_type['name'] ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
@@ -46,7 +52,9 @@
                 <label for="court-location" class="form-label" style="margin-bottom: 18px;">Lokasi Pengadilan</label>
                 <select class="form-select" id="court-location" aria-label="Select case location">
                     <option selected>Pilih Lokasi Pengadilan</option>
-                    <option value="1">JAWA TIMUR</option>
+                    <?php foreach ($provinces as $province) : ?>
+                        <option value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
@@ -86,7 +94,9 @@
                 <label for="case-subject" class="form-label" style="margin-bottom: 18px;">Pokok Perkara</label>
                 <select class="form-select" id="case-subject" aria-label="Select case subject">
                     <option selected>Pilih Pokok Perkara</option>
-                    <option value="1">Eks. BPPN</option>
+                    <?php foreach ($case_subjects as $case_subject) : ?>
+                        <option value="<?= $case_subject['id'] ?>"><?= $case_subject['name'] ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
@@ -107,14 +117,14 @@
                     <div class="col-6">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="compensationClaim" id="claim-true" value="1">
-                            <label class="form-check-label" for="claim-true">Ya, Ada</label>
+                            <label class="form-check-label" style="line-height: 1.5;" for="claim-true">Ya, Ada</label>
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="compensationClaim" id="claim-false" value="0">
-                            <label class="form-check-label" for="claim-false">Tidak Ada</label>
+                            <input class="form-check-input" type="radio" name="compensationClaim" id="claim-false" value="0" checked>
+                            <label class="form-check-label" style="line-height: 1.5;" for="claim-false">Tidak Ada</label>
                         </div>
                     </div>
                 </div>
@@ -123,21 +133,29 @@
             <div class="col-12">
                 <label for="case-summary" class="form-label" style="margin-bottom: 18px;">Nominal Tuntutan Ganti Rugi (TGR)</label>
 
-                <div class="d-flex align-items-center" style="gap: 30px;">
-                    <div class="col">
-                        <select class="form-select" aria-label="Select currency">
-                            <option selected>IDR</option>
-                        </select>
+                <div class="d-flex flex-column" style="gap: 18px;">
+                    <div class="d-flex align-items-center" style="gap: 30px;">
+                        <div class="col-4">
+                            <select class="form-select" id="currency" aria-label="Select currency">
+                                <?php foreach ($currencies as $currency) : ?>
+                                    <option value="<?= $currency['id'] ?>" data-code="<?= $currency['code'] ?>"><?= $currency['name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="flex-fill">
+                            <input type="number" class="form-control" id="claim-amount" placeholder="Masukkan Nominal Tuntutan Ganti Rugi">
+                        </div>
+
+                        <div class="flex-shrink-1">
+                            <button id="add-claim" style="padding: 10px; border-radius: 5px; border: none; background-color: var(--blue-stone-500);">
+                                <img src="<?= base_url('/img/plus.png') ?>" alt="plus" width="15">
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="flex-fill">
-                        <input type="number" class="form-control" id="claim-amount" placeholder="Masukkan Nominal Tuntutan Ganti Rugi">
-                    </div>
-
-                    <div class="flex-shrink-1">
-                        <button style="padding: 10px; border-radius: 5px; border: none; background-color: var(--blue-stone-500);">
-                            <img src="<?= base_url('/img/plus.png') ?>" alt="plus" width="15">
-                        </button>
+                    <!-- Claims -->
+                    <div id="claims-container" class="d-flex flex-column align-items-center" style="gap: 17px;">
                     </div>
                 </div>
             </div>
@@ -150,7 +168,7 @@
         <div class="row" style="--bs-gutter-x: 70px; --bs-gutter-y: 40px;">
             <div class="col">
                 <label for="pic" class="form-label" style="margin-bottom: 18px;">PIC / Penanggung Jawab Data Perkara</label>
-                <input type="text" class="form-control" id="pic" value="<?= session()->name ?>" disabled>
+                <input type="text" class="form-control fw-bold" style="padding: 15px 20px;" id="pic" value="<?= session()->name ?>" disabled>
             </div>
         </div>
     </div>
@@ -166,6 +184,22 @@
     </div>
 </div>
 
+<template id="claim-template">
+    <div class="d-flex w-100 align-items-center claim-item" style="gap: 30px;">
+        <div class="col-4" style="padding: 10px 12px; border-radius: var(--bs-border-radius); border: 1px solid var(--bs-border-color)">
+            <span class="claim-currency" data-id="1">IDR</span>
+        </div>
+        <div class="flex-fill" style="padding: 10px 12px; border-radius: var(--bs-border-radius); border: 1px solid var(--bs-border-color)">
+            <span class="claim-amount">50.000.000</span>
+        </div>
+        <div class="flex-shrink-1">
+            <button class="delete-claim" style="padding: 7.5px; border-radius: 5px; border: none; background-color: var(--blue-stone-500);">
+                <img src="<?= base_url('/img/trash.png') ?>" alt="trash" width="20">
+            </button>
+        </div>
+    </div>
+</template>
+
 <div class="modal" id="modal-loading" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="width: 300px; height: 270px;">
         <div class="modal-content">
@@ -177,33 +211,64 @@
         </div>
     </div>
 </div>
-
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
 <script>
-    const modalLoading = new bootstrap.Modal('#modal-loading');
+    const modalLoading = new bootstrap.Modal("#modal-loading");
 
-    $(document).ready(function() {
-        if ("<?= $method ?>" === "create") {
-            $("#claim-false").prop("checked", true);
+    $("#add-claim").on("click", function() {
+        const currencyId = $("#currency").val();
+        const currency = $("#currency :selected").data("code");
+        const amount = $("#claim-amount").val();
+
+        if (!amount || amount <= 0) {
+            alert("Masukkan nominal yang valid.");
+            return;
         }
+
+        const formattedAmount = parseInt(amount).toLocaleString("id-ID");
+
+        const $template = $($("#claim-template").html());
+        $template.find(".claim-currency").text(currency);
+        $template.find(".claim-currency").attr("data-id", currencyId);
+        $template.find(".claim-amount").text(formattedAmount);
+
+        $("#claims-container").append($template);
+        $("#claim-amount").val("");
+    });
+
+    $("#claims-container").on("click", ".delete-claim", function() {
+        $(this).closest(".d-flex").remove();
     });
 
     $("#save").on("click", function() {
+        const claims = [];
+
+        $(".claim-item").each(function() {
+            const currencyId = $(this).find(".claim-currency").data("id");
+            const amount = $(this).find(".claim-amount").text().split(".").join("");
+
+            claims.push({
+                currencyId,
+                amount
+            });
+        });
+
         $.ajax({
             method: "POST",
-            url: "<?= base_url('/legal-cases/store') ?>",
+            url: "<?= base_url('/cases') ?>",
             data: {
                 caseNumber: $("#case-number").val(),
-                caseType: $("#case-type").val(),
-                courtLocation: $("#court-location").val(),
-                court: $("#court").val(),
+                caseTypeId: $("#case-type").val(),
+                provinceId: $("#court-location").val(),
+                courtId: $("#court").val(),
                 caseDate: $("#case-date").val(),
                 caseDescription: $("#case-description").val(),
-                caseSubject: $("#case-subject").val(),
+                caseSubjectId: $("#case-subject").val(),
                 caseSummary: $("#case-summary").val(),
                 compensationClaim: $(`input[name="compensationClaim"]:checked`).val(),
+                claims: JSON.stringify(claims),
             },
             dataType: "json",
             beforeSend: function() {
@@ -213,8 +278,8 @@
                 modalLoading.hide();
             },
             success: function(response) {
-                if (response.status === "success") {
-                    window.location.href = "/legal-cases";
+                if (response.success) {
+                    window.location.href = "/cases";
                 } else {
                     alert(response.message);
                 }

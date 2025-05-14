@@ -60,10 +60,18 @@
 
         <hr class="submenu-hr">
 
-        <a href="<?= base_url('/legal-cases') ?>" class="submenu bold-4" style="text-decoration: none;">
-            <img src="<?= $active_menu === 'legal_cases' ? base_url('/img/gavel-active.png') : base_url('/img/gavel.png') ?>" alt="gavel" width="29">
+        <a href="<?= base_url('/cases') ?>" class="submenu bold-4" style="text-decoration: none;">
+            <img src="<?= $active_menu === 'cases' ? base_url('/img/gavel-active.png') : base_url('/img/gavel.png') ?>" alt="gavel" width="29">
 
-            <span class="<?= $active_menu === 'legal_cases' ? 'text-blue-stone-600' : 'color-1' ?>">Identitas Perkara</span>
+            <span class="<?= $active_menu === 'cases' ? 'text-blue-stone-600' : 'color-1' ?>">Identitas Perkara</span>
+        </a>
+
+        <hr class="submenu-hr">
+
+        <a href="<?= base_url('/manage-cases') ?>" class="submenu bold-4" style="text-decoration: none;">
+            <img src="<?= $active_menu === 'manage_cases' ? base_url('/img/deadline-active.png') : base_url('/img/deadline.png') ?>" alt="deadline" width="29">
+
+            <span class="<?= $active_menu === 'manage_cases' ? 'text-blue-stone-600' : 'color-1' ?>">Kelola Perkara</span>
         </a>
     </div>
 

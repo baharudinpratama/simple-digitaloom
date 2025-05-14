@@ -38,10 +38,11 @@ Login
                     <div class="">
                         <label class="form-label">Password</label>
                         <div class="input-group">
-                            <input type="password" id="password" class="form-control" placeholder="Password Anda">
-                            <span class="input-group-text">
-                                👁️ <!-- You can replace this with a real eye icon -->
-                            </span>
+                            <input type="password" id="password" class="form-control" style="border-right: none;" placeholder="Password Anda">
+                            <button type="button" id="toggle-password" class="input-group-text" style="border-left: none; background-color: white;">
+                                <img src="<?= base_url('/img/eye.svg') ?>" alt="eye-open" class="eye-open" width="25" height="25" style="display: inline;">
+                                <img src="<?= base_url('/img/eye-closed.svg') ?>" alt="eye-closed" class="eye-closed" width="25" style="display: none;">
+                            </button>
                         </div>
                     </div>
 
@@ -58,6 +59,18 @@ Login
 
 <?= $this->section('script') ?>
 <script>
+    $("#toggle-password").on("click", function() {
+        const passwordInput = $("#password");
+        const eyeOpen = $(this).find(".eye-open");
+        const eyeClosed = $(this).find(".eye-closed");
+
+        const isPassword = passwordInput.attr("type") === "password";
+
+        passwordInput.attr("type", isPassword ? "text" : "password");
+        eyeOpen.toggle(!isPassword);
+        eyeClosed.toggle(isPassword);
+    });
+
     $("#login-form").on("submit", function(e) {
         e.preventDefault();
 
@@ -70,7 +83,7 @@ Login
             },
             dataType: "json",
             success: function(response) {
-                if (response.status === "success") {
+                if (response.success) {
                     window.location.href = "/dashboard";
                 } else {
                     alert(response.message);

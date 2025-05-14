@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class LegalCaseModel extends Model
+class CaseAgendaModel extends Model
 {
-    protected $table            = 'legal_cases';
+    protected $table            = 'case_agendas';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = true;
+    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['case_number', 'case_type', 'court_location', 'court', 'case_date', 'case_description', 'case_subject', 'case_summary', 'compensation_claim', 'pic'];
+    protected $allowedFields    = ['case_id', 'position_id', 'level', 'date', 'officer', 'outcome'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -21,7 +21,7 @@ class LegalCaseModel extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
