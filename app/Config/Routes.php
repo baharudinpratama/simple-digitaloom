@@ -44,3 +44,15 @@ $routes->get('/manage-cases/(:num)/agendas', 'CaseAgendaController::indexByCase/
 $routes->post('/case-agendas', 'CaseAgendaController::store');
 $routes->post('/case-agendas/update', 'CaseAgendaController::update');
 $routes->post('/case-agendas/delete', 'CaseAgendaController::delete');
+
+// Account
+$routes->get('/operators', 'OperatorController::index');
+$routes->get('/operators/create', 'OperatorController::create');
+$routes->post('/operators', 'OperatorController::store');
+$routes->post('/operators/update', 'OperatorController::update');
+
+$routes->get('/manage-operators', 'ManageOperatorController::index');
+$routes->get('/manage-operators/(:num)', 'ManageOperatorController::show/$1');
+
+// Report
+$routes->get('/reports', 'ReportController::index');

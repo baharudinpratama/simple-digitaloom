@@ -66,32 +66,50 @@
             <span class="<?= $active_menu === 'cases' ? 'text-blue-stone-600' : 'color-1' ?>">Identitas Perkara</span>
         </a>
 
-        <hr class="submenu-hr">
+        <?php if (session()->get('role') === 'operator') : ?>
+            <hr class="submenu-hr">
 
-        <a href="<?= base_url('/manage-cases') ?>" class="submenu bold-4" style="text-decoration: none;">
-            <img src="<?= $active_menu === 'manage_cases' ? base_url('/img/deadline-active.png') : base_url('/img/deadline.png') ?>" alt="deadline" width="29">
+            <a href="<?= base_url('/manage-cases') ?>" class="submenu bold-4" style="text-decoration: none;">
+                <img src="<?= $active_menu === 'manage_cases' ? base_url('/img/deadline-active.png') : base_url('/img/deadline.png') ?>" alt="deadline" width="29">
 
-            <span class="<?= $active_menu === 'manage_cases' ? 'text-blue-stone-600' : 'color-1' ?>">Kelola Perkara</span>
-        </a>
+                <span class="<?= $active_menu === 'manage_cases' ? 'text-blue-stone-600' : 'color-1' ?>">Kelola Perkara</span>
+            </a>
+        <?php endif; ?>
     </div>
 
-    <div class="menu extra-bold-2">
-        Manajemen Operator
-    </div>
-
-    <div class="submenu-wrapper">
-        <div role="button" class="submenu bold-4">
-            <img src="<?= base_url('/img/user.png') ?>" alt="user" width="29">
-
-            <span class="color-1">Daftar Akun Operator</span>
+    <?php if (session()->get('role') === 'admin') : ?>
+        <div class="menu extra-bold-2">
+            Manajemen Operator
         </div>
 
-        <hr class="submenu-hr">
+        <div class="submenu-wrapper">
+            <a href="<?= base_url('/operators') ?>" class="submenu bold-4" style="text-decoration: none;">
+                <img src="<?= $active_menu === 'operators' ? base_url('/img/user-active.png') : base_url('/img/user.png') ?>" alt="user" width="29">
 
-        <div role="button" class="submenu bold-4">
-            <img src="<?= base_url('/img/user-pencil.png') ?>" alt="user-pencil" width="29">
+                <span class="<?= $active_menu === 'operators' ? 'text-blue-stone-600' : 'color-1' ?>">Daftar Akun Operator</span>
+            </a>
 
-            <span class="color-1">Kelola Akun Operator</span>
+            <hr class="submenu-hr">
+
+            <a href="<?= base_url('/manage-operators') ?>" class="submenu bold-4" style="text-decoration: none;">
+                <img src="<?= $active_menu === 'manage_operators' ? base_url('/img/user-pencil-active.png') : base_url('/img/user-pencil.png') ?>" alt="user-pencil" width="29">
+
+                <span class="<?= $active_menu === 'manage_operators' ? 'text-blue-stone-600' : 'color-1' ?>">Kelola Akun Operator</span>
+            </a>
         </div>
-    </div>
+    <?php endif; ?>
+
+    <?php if (session()->get('role') === 'operator') : ?>
+        <div class="menu extra-bold-2">
+            Laporan
+        </div>
+
+        <div class="submenu-wrapper">
+            <a href="<?= base_url('/reports') ?>" class="submenu bold-4" style="text-decoration: none;">
+                <img src="<?= $active_menu === 'reports' ? base_url('/img/file-gavel-active.png') : base_url('/img/file-gavel.png') ?>" alt="user" width="29">
+
+                <span class="<?= $active_menu === 'reports' ? 'text-blue-stone-600' : 'color-1' ?>">Laporan Daftar Perkara</span>
+            </a>
+        </div>
+    <?php endif; ?>
 </div>

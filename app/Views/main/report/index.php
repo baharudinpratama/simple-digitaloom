@@ -31,8 +31,8 @@
     <div class="d-flex flex-column" style="border-radius: 10px; border: 2px solid #c3c3c3;">
         <div class="d-flex justify-content-between align-items-center" style="padding: 49px 36px;">
             <?php
-            $title1 = $active_menu === 'cases' ? 'Daftar Perkara yang terdaftar' : 'Daftar Perkara';
-            $subtitle1 = $active_menu === 'cases' ? '3 Perkara baru saja telah diinput (?)' : 'Daftar Perkara yang dikelola di sistem ini';
+            $title1 = $active_menu === 'reports' ? 'Laporan Daftar Perkara terdaftar' : 'Daftar Perkara';
+            $subtitle1 = $active_menu === 'reports' ? 'Total Perkara : ' . sizeof($cases) . ' Perkara' : 'Daftar Perkara yang dikelola di sistem ini';
             ?>
             <div class="d-flex flex-column" style="gap: 14px;">
                 <h2 class="extra-bold-5 text-blue-stone-600"><?= $title1 ?></h2>
@@ -55,10 +55,11 @@
                     <th width="5%">No</th>
                     <th>Nomor Perkara</th>
                     <th>Tanggal Perkara</th>
+                    <th>Jenis Peradilan</th>
                     <th>Pokok Perkara</th>
                     <th>Pengadilan</th>
+                    <th>Posisi Perkara</th>
                     <th>PIC</th>
-                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody class="text-center fw-extra-bold">
@@ -67,34 +68,11 @@
                         <td style="height: 94px;"><?= $index + 1 ?></td>
                         <td class="fw-semibold"><?= $case['case_number'] ?></td>
                         <td class="fw-semibold"><?= date('d-m-Y', strtotime($case['case_date'])) ?></td>
+                        <td><?= $case['case_type_name'] ?></td>
                         <td><?= $case['case_subject_name'] ?></td>
                         <td><?= $case['court_name'] ?></td>
+                        <td></td>
                         <td><?= $case['pic_name'] ?></td>
-                        <td class="fw-bold" style="padding: 22px 0px; font-size: 13px;">
-                            <?php if ($active_menu === 'cases') : ?>
-                                <div class="d-flex flex-column align-items-center" style="gap: 10px;">
-                                    <a href="<?= base_url('/cases/' .  $case['id']) ?>" class="d-inline-flex w-75 justify-content-center align-items-center bg-blue-stone-600" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
-                                        Lihat Detail
-                                    </a>
-                                    <?php if (session()->get('role') === 'operator') : ?>
-                                        <a href="<?= base_url('/cases/' . $case['id']) ?>" class="d-inline-flex w-75 justify-content-center align-items-center bg-blue-stone-800" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
-                                            <img src="<?= base_url('/img/file-download.png') ?>" alt="file-download" style="margin-right: 5px;" width="15">
-                                            Download Resume
-                                        </a>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($active_menu === 'manage_cases') : ?>
-                                <div class="d-flex flex-column align-items-center" style="gap: 10px;">
-                                    <a href="<?= base_url('/manage-cases/' .  $case['id']) ?>" class="d-inline-flex w-75 justify-content-center align-items-center bg-blue-stone-600" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
-                                        Ubah Data Perkara
-                                    </a>
-                                    <a href="#" class="d-inline-flex w-75 justify-content-center align-items-center bg-blue-stone-800" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
-                                        Hapus Data
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

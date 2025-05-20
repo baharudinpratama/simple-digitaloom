@@ -459,7 +459,7 @@
         <td class="asset-location fw-semibold"></td>
         <td class="ownership-proof fw-bold"></td>
         <td class="asset-owner fw-bold"></td>
-        <td>
+        <td class="action">
             <div class="d-flex align-items-center justify-content-center" style="gap: 5px;">
                 <div role="button" class="edit-data text-center bg-blue-stone-500"
                     style="padding: 10px 20px; border-radius: 5px; color: white;">
@@ -482,7 +482,7 @@
         <td class="party-address fw-bold"></td>
         <td class="party-position fw-bold"></td>
         <td class="party-order fw-bold"></td>
-        <td>
+        <td class="action">
             <div class="d-flex align-items-center justify-content-center" style="gap: 5px;">
                 <div role="button" class="edit-party text-center bg-blue-stone-500"
                     style="padding: 10px 20px; border-radius: 5px; color: white;">
@@ -506,7 +506,7 @@
         <td class="object-summary fw-bold"></td>
         <td class="object-location fw-bold"></td>
         <td class="object-owner fw-bold"></td>
-        <td>
+        <td class="action">
             <div class="d-flex align-items-center justify-content-center" style="gap: 5px;">
                 <div role="button" class="edit-object text-center bg-blue-stone-500"
                     style="padding: 10px 20px; border-radius: 5px; color: white;">
@@ -533,7 +533,7 @@
         <td class="consideration fw-bold">-</td>
         <td class="officer fw-bold"></td>
         <td class="doc fw-bold">-</td>
-        <td>
+        <td class="action">
             <div class="d-flex align-items-center justify-content-center" style="gap: 5px;">
                 <div role="button" class="edit-agenda text-center bg-blue-stone-500"
                     style="padding: 10px 20px; border-radius: 5px; color: white;">
@@ -1001,6 +1001,7 @@
 
         if ("<?= $active_menu ?>" === "cases") {
             $("th.action").prop("hidden", true);
+            $("#case-data-tbody td.action").prop("hidden", true);
         }
     });
 
@@ -1048,6 +1049,10 @@
                             });
 
                             $tbody.append($template);
+
+                            if ("<?= $active_menu ?>" === "cases") {
+                                $("td.action").prop("hidden", true);
+                            }
                         });
                     } else {
                         const $tbody = $("#case-data-tbody");
@@ -1253,6 +1258,10 @@
                             });
 
                             $tbody.append($template);
+
+                            if ("<?= $active_menu ?>" === "cases") {
+                                $("td.action").prop("hidden", true);
+                            }
                         });
                     } else {
                         const $tbody = $("#case-party-tbody");
@@ -1463,6 +1472,10 @@
                             });
 
                             $tbody.append($template);
+
+                            if ("<?= $active_menu ?>" === "cases") {
+                                $("td.action").prop("hidden", true);
+                            }
                         });
                     } else {
                         const $tbody = $("#case-object-tbody");
@@ -1702,6 +1715,10 @@
                             });
 
                             $tbody.append($template);
+
+                            if ("<?= $active_menu ?>" === "cases") {
+                                $("td.action").prop("hidden", true);
+                            }
                         });
                     } else {
                         const $tbody = $("#case-agenda-tbody");
