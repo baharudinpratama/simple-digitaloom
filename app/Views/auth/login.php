@@ -33,7 +33,7 @@ Login
         <div class="mx-auto login-container bg-white border-card">
             <div class="d-flex flex-column gap-3">
                 <h1 class="extra-bold-1 text-blue-stone-600">Login</h1>
-                <p class="fw-medium color-1">Selamat Datang di Web Super Admin SIMPLE</p>
+                <p class="fw-medium color-1" hidden>Selamat Datang di Web Super Admin SIMPLE</p>
             </div>
 
             <form id="login-form">
