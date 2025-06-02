@@ -55,10 +55,12 @@ class CaseAgendaController extends BaseController
             foreach ($files['files'] as $file) {
                 if ($file->isValid() && !$file->hasMoved()) {
                     $newName = $file->getRandomName();
+                    $originalName = $file->getClientName();
                     $file->move(ROOTPATH . 'public/uploads/agenda_files', $newName);
 
                     $agendaFileModel->insert([
                         'agenda_id' => $caseAgendaId,
+                        'name' => $originalName,
                         'filename'  => $newName
                     ]);
                 }
@@ -127,10 +129,12 @@ class CaseAgendaController extends BaseController
             foreach ($newFiles['newFiles'] as $newFile) {
                 if ($newFile->isValid() && !$newFile->hasMoved()) {
                     $newName = $newFile->getRandomName();
+                    $originalName = $newFile->getClientName();
                     $newFile->move(ROOTPATH . 'public/uploads/agenda_files', $newName);
 
                     $agendaFileModel->insert([
                         'agenda_id' => $this->request->getPost('id'),
+                        'name' => $originalName,
                         'filename'  => $newName
                     ]);
                 }

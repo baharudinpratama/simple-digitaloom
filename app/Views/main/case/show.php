@@ -403,12 +403,15 @@
                             </div>
                         <?php endif; ?>
 
-                        <div role="button" id="download-agenda" class="d-inline-flex justify-content-center align-items-center bg-blue-stone-500" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none;">
-                            <div class="d-flex align-items-center" style="gap: 10px;">
-                                <img src="<?= base_url('/img/file-download-2.png') ?>" alt="download" width="20">
-                                <p style="font-weight: 700; font-size: 13px; line-height: normal;">Download Posisi Perkara</p>
-                            </div>
-                        </div>
+                        <form action="<?= base_url('/reports/agenda') ?>" method="post" target="_blank">
+                            <input type="hidden" name="caseId" value="<?= $cases['id'] ?>">
+                            <button type="submit" class="d-inline-flex justify-content-center align-items-center border-0 bg-blue-stone-500" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none;">
+                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                    <img src="<?= base_url('/img/file-download-2.png') ?>" alt="download" width="20">
+                                    <p style="font-weight: 700; font-size: 13px; line-height: normal;">Download Posisi Perkara</p>
+                                </div>
+                            </button>
+                        </form>
                     </div>
                 </div>
 

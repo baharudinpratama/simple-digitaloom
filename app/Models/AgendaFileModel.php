@@ -12,7 +12,7 @@ class AgendaFileModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['agenda_id', 'filename'];
+    protected $allowedFields    = ['agenda_id', 'name', 'filename'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
