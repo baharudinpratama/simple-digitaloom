@@ -60,10 +60,7 @@
 
             <div class="col">
                 <label for="court" class="form-label" style="margin-bottom: 18px;">Pengadilan</label>
-                <select class="form-select" id="court" aria-label="Select court">
-                    <option selected>Pilih Pengadilan</option>
-                    <option value="1">Pengadilan Negeri Surabaya</option>
-                </select>
+                <input type="text" class="form-control" id="court" placeholder="Masukkan Nama Pengadilan">
             </div>
 
             <div class="col">
@@ -262,7 +259,7 @@
                 caseNumber: $("#case-number").val(),
                 caseTypeId: $("#case-type").val(),
                 provinceId: $("#court-location").val(),
-                courtId: $("#court").val(),
+                courtName: $("#court").val(),
                 caseDate: $("#case-date").val(),
                 caseDescription: $("#case-description").val(),
                 caseSubjectId: $("#case-subject").val(),

@@ -12,9 +12,8 @@ class DashboardController extends BaseController
     {
         $caseModel = new CaseModel();
         $cases = $caseModel
-            ->select('cases.*, courts.name as court_name, case_types.name as case_type_name')
+            ->select('cases.*, case_types.name as case_type_name')
             ->join('case_types', 'case_types.id = cases.case_type_id')
-            ->join('courts', 'courts.id = cases.court_id')
             ->get()
             ->getResultArray();
 

@@ -23,9 +23,8 @@ class CaseController extends BaseController
     {
         $caseModel = new CaseModel();
         $cases = $caseModel
-            ->select('cases.*, case_subjects.name as case_subject_name, courts.name as court_name, users.name as pic_name')
+            ->select('cases.*, case_subjects.name as case_subject_name, users.name as pic_name')
             ->join('case_subjects', 'case_subjects.id = cases.case_subject_id')
-            ->join('courts', 'courts.id = cases.court_id')
             ->join('users', 'users.id = cases.pic')
             ->get()
             ->getResultArray();
@@ -87,7 +86,7 @@ class CaseController extends BaseController
             'case_number'           => $this->request->getPost('caseNumber'),
             'case_type_id'          => $this->request->getPost('caseTypeId'),
             'province_id'           => $this->request->getPost('provinceId'),
-            'court_id'              => $this->request->getPost('courtId'),
+            'court_name'            => $this->request->getPost('courtName'),
             'case_date'             => $this->request->getPost('caseDate'),
             'case_description'      => $this->request->getPost('caseDescription'),
             'case_subject_id'       => $this->request->getPost('caseSubjectId'),
@@ -137,10 +136,9 @@ class CaseController extends BaseController
         $casePositionModel = new CasePositionModel();
 
         $cases = $caseModel
-            ->select('cases.*, case_types.name as case_type_name, provinces.name as province_name, courts.name as court_name, case_subjects.name as case_subject_name, users.name as pic_name')
+            ->select('cases.*, case_types.name as case_type_name, provinces.name as province_name, case_subjects.name as case_subject_name, users.name as pic_name')
             ->join('case_types', 'case_types.id = cases.case_type_id')
             ->join('provinces', 'provinces.id = cases.province_id')
-            ->join('courts', 'courts.id = cases.court_id')
             ->join('case_subjects', 'case_subjects.id = cases.case_subject_id')
             ->join('users', 'users.id = cases.pic')
             ->where('cases.id', $id)

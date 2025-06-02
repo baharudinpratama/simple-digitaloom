@@ -17,6 +17,7 @@ class CaseModel extends Model
         'case_type_id',
         'province_id',
         'court_id',
+        'court_name',
         'case_date',
         'case_description',
         'case_subject_id',
