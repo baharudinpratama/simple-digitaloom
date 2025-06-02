@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 20, 2025 at 12:51 AM
+-- Generation Time: Jun 02, 2025 at 02:47 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -30,8 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `agenda_files` (
   `id` int NOT NULL,
   `agenda_id` int NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
   `filename` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `agenda_files`
+--
+
+INSERT INTO `agenda_files` (`id`, `agenda_id`, `name`, `filename`) VALUES
+(4, 3, 'doc-db.jpeg', '1748865727_bb87c0db2131afcdcc71.jpeg'),
+(5, 4, 'contoh-doc.jpeg', '1748873651_273137c408c1c07c345e.jpeg'),
+(6, 6, 'test-db.jpeg', '1748873897_26a114db7cc64872987e.jpeg');
 
 -- --------------------------------------------------------
 
@@ -114,6 +124,15 @@ CREATE TABLE `case_agendas` (
   `outcome` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `case_agendas`
+--
+
+INSERT INTO `case_agendas` (`id`, `case_id`, `position_id`, `level`, `date`, `officer`, `outcome`) VALUES
+(3, 10, 1, 'PN', '2025-06-02', 'Hakim', '-'),
+(4, 10, 2, 'PN', '2025-06-03', 'Pengawas', '-'),
+(6, 10, 10, 'PN', '2025-06-05', 'Saksi', '-');
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +194,13 @@ CREATE TABLE `case_objects` (
   `summary` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `case_objects`
+--
+
+INSERT INTO `case_objects` (`id`, `case_id`, `asset_type_id`, `area`, `doc_type_id`, `owner`, `location`, `summary`) VALUES
+(5, 10, 1, 125, 1, 'Makelar', 'Surabaya', '-');
+
 -- --------------------------------------------------------
 
 --
@@ -190,6 +216,14 @@ CREATE TABLE `case_parties` (
   `address` text,
   `order` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `case_parties`
+--
+
+INSERT INTO `case_parties` (`id`, `case_id`, `name`, `unit_id`, `position`, `address`, `order`) VALUES
+(3, 10, 'Pihak 1', 1, 'Penggugat', '-', 1),
+(4, 10, 'Pihak 2', 1, 'Tergugat', '-', 2);
 
 -- --------------------------------------------------------
 
@@ -575,7 +609,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `agenda_files`
 --
 ALTER TABLE `agenda_files`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `asset_types`
@@ -593,7 +627,7 @@ ALTER TABLE `cases`
 -- AUTO_INCREMENT for table `case_agendas`
 --
 ALTER TABLE `case_agendas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `case_claims`
@@ -611,13 +645,13 @@ ALTER TABLE `case_data`
 -- AUTO_INCREMENT for table `case_objects`
 --
 ALTER TABLE `case_objects`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `case_parties`
 --
 ALTER TABLE `case_parties`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `case_positions`
