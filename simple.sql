@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 02, 2025 at 03:06 PM
+-- Generation Time: Jun 03, 2025 at 12:49 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -103,11 +103,11 @@ CREATE TABLE `cases` (
 --
 
 INSERT INTO `cases` (`id`, `case_number`, `case_type_id`, `province_id`, `court_id`, `court_name`, `case_date`, `case_description`, `case_subject_id`, `case_summary`, `compensation_claim`, `pic`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(10, '78/Pdt.G/2025/PN.Sby', 3, 16, 1, 'PN Surabaya', '2025-05-08', 'Sengketa Kepemilikian Aset Kelolaan LMAN yang terletak di jalan Basuki Rahmat No.49-51, Kel. Embong Kaliasin, Kec. Genteng Kota Surabaya', 1, 'Sengketa Kepemilikian Aset Kelolaan LMAN yang terletak di jalan Basuki Rahmat No.49-51, Kel. Embong Kaliasin, Kec. Genteng Kota Surabaya\n\nGugatan diajukan oleh PT. Hotel Embong Woengoe yang diwakili oleh Harijanto Gondokusumo Dirut yang dikuasakan kepada Office  Akhmad Zaini & Partners', 1, 1, '2025-05-07 18:06:04', '2025-05-12 17:59:15', NULL),
-(14, '80/Pdt.G/2025/PN.Sby', 3, 16, 1, 'PN Surabaya', '2025-05-09', 'Sengketa Kepemilikian Aset Kelolaan LMAN yang terletak di jalan Basuki Rahmat No.49-51, Kel. Embong Kaliasin, Kec. Genteng Kota Surabaya', 2, 'Sengketa Kepemilikian Aset Kelolaan LMAN yang terletak di jalan Basuki Rahmat No.49-51, Kel. Embong Kaliasin, Kec. Genteng Kota Surabaya\n\nGugatan diajukan oleh PT. Hotel Embong Woengoe yang diwakili oleh Harijanto Gondokusumo Dirut yang dikuasakan kepada Office  Akhmad Zaini & Partners', 1, 1, '2025-05-09 15:44:37', '2025-05-09 15:44:37', NULL),
-(15, 'PK-25/05/11/PN.025', 1, 16, 1, 'PN Surabaya', '2025-05-11', '-', 1, '-', 0, 1, '2025-05-10 18:45:34', '2025-05-10 18:45:34', NULL),
-(16, '81/Pdt.G/2025/PN.Sby', 2, 16, 1, 'PN Surabaya', '2025-05-11', '-', 2, '-', 0, 1, '2025-05-10 18:50:49', '2025-05-10 18:50:49', NULL),
-(17, '82/Pdt.G/2025/PN.Sby', 4, 16, 1, 'PN Surabaya', '2025-05-15', '-', 1, '-', 0, 1, '2025-05-10 18:52:48', '2025-05-10 18:52:48', NULL),
+(10, '78/Pdt.G/2025/PN.Sby', 3, 16, 1, 'PN Surabaya', '2025-05-08', 'Sengketa Kepemilikian Aset Kelolaan LMAN yang terletak di jalan Basuki Rahmat No.49-51, Kel. Embong Kaliasin, Kec. Genteng Kota Surabaya', 1, 'Sengketa Kepemilikian Aset Kelolaan LMAN yang terletak di jalan Basuki Rahmat No.49-51, Kel. Embong Kaliasin, Kec. Genteng Kota Surabaya\n\nGugatan diajukan oleh PT. Hotel Embong Woengoe yang diwakili oleh Harijanto Gondokusumo Dirut yang dikuasakan kepada Office  Akhmad Zaini & Partners', 1, 2, '2025-05-07 18:06:04', '2025-05-12 17:59:15', NULL),
+(14, '80/Pdt.G/2025/PN.Sby', 3, 16, 1, 'PN Surabaya', '2025-05-09', 'Sengketa Kepemilikian Aset Kelolaan LMAN yang terletak di jalan Basuki Rahmat No.49-51, Kel. Embong Kaliasin, Kec. Genteng Kota Surabaya', 2, 'Sengketa Kepemilikian Aset Kelolaan LMAN yang terletak di jalan Basuki Rahmat No.49-51, Kel. Embong Kaliasin, Kec. Genteng Kota Surabaya\n\nGugatan diajukan oleh PT. Hotel Embong Woengoe yang diwakili oleh Harijanto Gondokusumo Dirut yang dikuasakan kepada Office  Akhmad Zaini & Partners', 1, 2, '2025-05-09 15:44:37', '2025-05-09 15:44:37', NULL),
+(15, 'PK-25/05/11/PN.025', 1, 16, 1, 'PN Surabaya', '2025-05-11', '-', 1, '-', 0, 2, '2025-05-10 18:45:34', '2025-05-10 18:45:34', NULL),
+(16, '81/Pdt.G/2025/PN.Sby', 2, 16, 1, 'PN Surabaya', '2025-05-11', '-', 2, '-', 0, 2, '2025-05-10 18:50:49', '2025-05-10 18:50:49', NULL),
+(17, '82/Pdt.G/2025/PN.Sby', 4, 16, 1, 'PN Surabaya', '2025-05-15', '-', 1, '-', 0, 2, '2025-05-10 18:52:48', '2025-05-10 18:52:48', NULL),
 (19, '1', 1, 1, 1, 'PN Surabaya', '2025-06-02', '-', 1, '-', 0, 2, '2025-06-02 14:55:31', '2025-06-02 14:55:31', NULL),
 (20, '2', 2, 11, NULL, 'PN Jakarta', '2025-06-03', '-', 2, '-', 0, 2, '2025-06-02 15:06:04', '2025-06-02 15:06:04', NULL);
 
@@ -134,7 +134,7 @@ CREATE TABLE `case_agendas` (
 INSERT INTO `case_agendas` (`id`, `case_id`, `position_id`, `level`, `date`, `officer`, `outcome`) VALUES
 (3, 10, 1, 'PN', '2025-06-02', 'Hakim', '-'),
 (4, 10, 2, 'PN', '2025-06-03', 'Pengawas', '-'),
-(6, 10, 10, 'PN', '2025-06-05', 'Saksi', '-');
+(6, 10, 8, 'PN', '2025-06-05', 'Agus', '-');
 
 -- --------------------------------------------------------
 

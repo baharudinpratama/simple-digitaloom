@@ -39,12 +39,12 @@
                 <p class="semi-bold-1 color-1"><?= $subtitle1 ?></p>
             </div>
 
-            <a href="<?= base_url('/cases/create') ?>" class="d-inline-flex justify-content-center align-items-center bg-blue-stone-600" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none;">
+            <!-- <a href="<?= base_url('/cases/create') ?>" class="d-inline-flex justify-content-center align-items-center bg-blue-stone-600" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none;">
                 <div class="d-flex align-items-center" style="gap: 10px;">
                     <img src="<?= base_url('/img/plus.png') ?>" alt="add" width="20">
                     <p style="font-weight: 700; font-size: 13px; line-height: normal;">Tambah Data Perkara</p>
                 </div>
-            </a>
+            </a> -->
         </div>
 
         <table>

@@ -24,7 +24,7 @@
                                 </div>
 
                                 <div class="d-flex flex-column" style="gap: 14px;">
-                                    <h3 class="extra-bold-5 color-text">Update Perkara : Perkara Memasuki Memori Banding</h3>
+                                    <h3 class="extra-bold-5 color-text">Update Perkara : <?= $case['last_agenda']['case_position_name'] ?? 'Input Baru' ?></h3>
 
                                     <div class="d-flex align-items-center regular-2" style="gap: 16px;">
                                         <p>No. Perkara : <span class="bold-2"><?= $case['case_number'] ?></span></p>
