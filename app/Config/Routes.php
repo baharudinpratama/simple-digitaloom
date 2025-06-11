@@ -24,6 +24,7 @@ $routes->get('/cases/(:num)', 'CaseController::show/$1');
 $routes->get('/manage-cases', 'ManageCaseController::index');
 $routes->get('/manage-cases/(:num)', 'ManageCaseController::show/$1');
 $routes->post('/manage-cases/update', 'ManageCaseController::update');
+$routes->post('/manage-cases/delete', 'ManageCaseController::delete');
 
 $routes->get('/manage-cases/(:num)/data', 'CaseDataController::indexByCase/$1');
 $routes->post('/case-data', 'CaseDataController::store');

@@ -4,8 +4,12 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AssetTypeModel;
+use App\Models\CaseAgendaModel;
 use App\Models\CaseModel;
 use App\Models\CaseClaimModel;
+use App\Models\CaseDataModel;
+use App\Models\CaseObjectModel;
+use App\Models\CasePartyModel;
 use App\Models\CasePositionModel;
 use App\Models\CurrencyModel;
 use App\Models\DocTypeModel;
@@ -139,6 +143,44 @@ class ManageCaseController extends BaseController
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'Data berhasil diperbarui!!!'
+            ], 200);
+        }
+    }
+
+    public function delete()
+    {
+        $db = db_connect();
+        $caseModel = new CaseModel();
+        $caseAgendaModel = new CaseAgendaModel();
+        $caseClaimModel = new CaseClaimModel();
+        $caseDataModel = new CaseDataModel();
+        $caseObjectModel = new CaseObjectModel();
+        $casePartyModel = new CasePartyModel();
+
+        $id = $this->request->getPost('id');
+
+        $db->transStart();
+
+        $caseModel->where('id', $id)->delete();
+        $caseAgendaModel->where('case_id', $id)->delete();
+        $caseClaimModel->where('case_id', $id)->delete();
+        $caseDataModel->where('case_id', $id)->delete();
+        $caseObjectModel->where('case_id', $id)->delete();
+        $casePartyModel->where('case_id', $id)->delete();
+
+        $db->transComplete();
+
+        if ($db->transStatus() === false) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Hapus gagal.'
+            ], 500);
+        } else {
+            session()->set(['flash_message' => 'Data berhasil dihapus!!!']);
+
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Data berhasil dihapus!!!'
             ], 200);
         }
     }

@@ -16,6 +16,7 @@ class ReportController extends BaseController
     public function index()
     {
         $caseModel = new CaseModel();
+        $caseAgendaModel = new CaseAgendaModel();
 
         $cases = $caseModel
             ->select('cases.*, case_types.name as case_type_name, case_subjects.name as case_subject_name, users.name as pic_name')
@@ -24,6 +25,14 @@ class ReportController extends BaseController
             ->join('users', 'users.id = cases.pic')
             ->get()
             ->getResultArray();
+        foreach ($cases as &$case) {
+            $case['last_agenda'] = $caseAgendaModel->select('case_agendas.*, case_positions.name as case_position_name')
+                ->join('case_positions', 'case_positions.id = case_agendas.position_id')
+                ->where('case_id', $case['id'])
+                ->orderBy('date', 'DESC')
+                ->get()
+                ->getRowArray();
+        }
 
         $data = [
             'page_title' => 'Laporan Daftar Perkara',

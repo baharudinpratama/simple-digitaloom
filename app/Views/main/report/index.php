@@ -69,7 +69,7 @@
                         <td><?= $case['case_type_name'] ?></td>
                         <td><?= $case['case_subject_name'] ?></td>
                         <td><?= $case['court_name'] ?></td>
-                        <td></td>
+                        <td><?= $case['last_agenda']['case_position_name'] ?? 'Input Baru' ?></td>
                         <td><?= $case['pic_name'] ?></td>
                     </tr>
                 <?php endforeach; ?>

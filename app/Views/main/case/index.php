@@ -89,9 +89,9 @@
                                     <a href="<?= base_url('/manage-cases/' .  $case['id']) ?>" class="d-inline-flex w-75 justify-content-center align-items-center bg-blue-stone-600" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
                                         Ubah Data Perkara
                                     </a>
-                                    <a href="#" class="d-inline-flex w-75 justify-content-center align-items-center bg-blue-stone-800" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
+                                    <div role=button onclick="handleDelete('<?= $case['id'] ?>')" class="d-inline-flex w-75 justify-content-center align-items-center bg-blue-stone-800" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
                                         Hapus Data
-                                    </a>
+                                    </div>
                                 </div>
                             <?php endif; ?>
                         </td>
@@ -99,6 +99,43 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal" id="modal-loading" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="width: 300px; height: 270px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex align-items-center justify-content-center">
+                    <img src="<?= base_url('/img/loading.gif') ?>" alt="loading" width="150">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-confirm" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered w-50">
+        <div class="modal-content">
+            <div class="modal-header fw-bold" style="padding: 35px;">
+                Hapus Data
+            </div>
+            <div class="modal-body" style="padding: 35px;">
+                <div class="d-flex align-items-center fw-semibold">
+                    Apakah anda yakin menghapus data ini?
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 35px;">
+                <div class="d-flex align-items-center" style="gap: 10px;">
+                    <div role="button" id="confirm-cancel" class="text-center" data-bs-dismiss="modal" style="min-width: 155px; padding: 10px; border-radius: 5px; border: 3px solid var(--blue-stone-600); color: white;">
+                        <p class="text-blue-stone-600" style="font-weight: 700; font-size: 13px; line-height: normal;">Batal</p>
+                    </div>
+                    <div role="button" id="confirm-ok" class="text-center bg-blue-stone-600" style="min-width: 155px; padding: 10px; border-radius: 5px; border: 3px solid var(--blue-stone-600); color: white;">
+                        <p style="font-weight: 700; font-size: 13px; line-height: normal;">Ya, Hapus</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -130,5 +167,64 @@
             <?php session()->remove('flash_message'); ?>
         }
     });
+
+    const modalLoading = new bootstrap.Modal("#modal-loading");
+    const modalConfirm = new bootstrap.Modal("#modal-confirm");
+
+    function showModalConfirm() {
+        return new Promise((resolve) => {
+            const modal = new bootstrap.Modal(("#modal-confirm"));
+
+            $("#confirm-ok").off("click").on("click", function() {
+                modal.hide();
+                resolve(true);
+            });
+
+            $("#confirm-cancel").off("click").on("click", function() {
+                modal.hide();
+                resolve(false);
+            });
+
+            modal.show();
+        });
+    }
+
+    const handleDelete = async (id) => {
+        const confirmed = await showModalConfirm();
+
+        if (confirmed) {
+            deleteData(id);
+        } else {
+            modalConfirm.hide();
+        }
+    }
+
+    const deleteData = (id) => {
+        $.ajax({
+            method: "POST",
+            url: "<?= base_url('/manage-cases/delete') ?>",
+            data: {
+                id,
+            },
+            dataType: "json",
+            beforeSend: function() {
+                modalLoading.show();
+            },
+            complete: function() {
+                modalLoading.hide();
+            },
+            success: function(response) {
+                if (response.success) {
+                   location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("AJAX error:", error);
+                alert("Something went wrong.");
+            }
+        });
+    }
 </script>
 <?= $this->endSection() ?>
