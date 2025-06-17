@@ -3,7 +3,6 @@
         display: flex;
         height: 162px;
         padding: 0px 20px;
-        gap: 120px;
     }
 
     .menu {
@@ -45,6 +44,8 @@
 <div id="sidebar" class="w-100 vh-100">
     <div class="sidebar-header d-flex align-items-center">
         <img src="<?= base_url('/img/logo.png') ?>" class="img-fluid" alt="logo" style="width: 10rem;">
+
+        <h1 class="fw-bold text-blue-stone-600" style="font-size: 1.5rem;">SIMPLE</h1>
     </div>
 
     <div class="menu extra-bold-2">

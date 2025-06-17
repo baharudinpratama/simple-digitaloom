@@ -535,7 +535,7 @@
         <td class="ruling-number fw-bold">-</td>
         <td class="consideration fw-bold">-</td>
         <td class="officer fw-bold"></td>
-        <td class="doc fw-bold">-</td>
+        <td class="doc fw-bold text-start text-truncate"></td>
         <td class="action">
             <div class="d-flex align-items-center justify-content-center" style="gap: 5px;">
                 <div role="button" class="edit-agenda text-center bg-blue-stone-500"
@@ -1670,18 +1670,20 @@
                             // $template.find(".ruling-number").text();
                             // $template.find(".consideration").text();
                             $template.find(".officer").text(item.officer);
-                            // $template.find(".doc").text();
+                            item.agenda_files.forEach(file => {
+                                $template.find(".doc").append(`<div>${file.name}</div>`);
+                            });
 
                             item.agenda_files.forEach((file, index) => {
                                 $("#agenda-file-preview").append(`
-                                    <div data-file-id="${file.id}" class="existing-file d-flex align-items-center justify-content-between" style="padding: 0px 20px;">
+                                    <div data-file-id="${file.id}" data-agenda-id="${file.agenda_id}" class="existing-file d-flex align-items-center justify-content-between file-preview" style="padding: 0px 20px;">
                                         <div class="d-flex align-items-center" style="gap: 20px;">
                                             <div style="width: 58px; padding: 10px 12px; border-radius: 10px; background-color: var(--blue-stone-200);">
                                                 <img src="<?= base_url('/img/file-pdf.png') ?>" alt="file-pdf" width="34">
                                             </div>
 
                                             <div class="d-flex flex-column justify-content-center" style="gap: 14px;">
-                                                <p class="bold-4">${file.filename}</p>
+                                                <p class="bold-4">${file.name}</p>
                                                 <p style="font-size: 13px;"></p>
                                             </div>
                                         </div>
@@ -1700,6 +1702,10 @@
                                 $("#agenda-date").val(item.date);
                                 $("#agenda-officer").val(item.officer);
                                 $("#agenda-outcome").val(item.outcome);
+                                $(".existing-file").addClass("d-none");
+                                item.agenda_files.forEach(agenda => {
+                                    $(`.existing-file[data-agenda-id="${item.id}"]`).removeClass("d-none");
+                                });
 
                                 $("#save-agenda").prop("hidden", true);
                                 $("#update-agenda").prop("hidden", false);
