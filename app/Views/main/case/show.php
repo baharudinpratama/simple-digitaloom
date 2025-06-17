@@ -683,7 +683,7 @@
                         <select class="form-select" id="party-position" aria-label="Select party position">
                             <option value="Penggugat" selected>Penggugat</option>
                             <option value="Tergugat">Tergugat</option>
-                            <option value="Saksi">Saksi</option>
+                            <option value="Turut Tergugat">Turut Tergugat</option>
                         </select>
                     </div>
 

@@ -218,6 +218,12 @@
         const currencyId = $("#currency").val();
         const currency = $("#currency :selected").data("code");
         const amount = $("#claim-amount").val();
+        console.log($("input[name='compensationClaim']").val());
+
+        if ($("input[name='compensationClaim']:checked").val() === "0") {
+            alert("Tidak bisa menambahkan nominal ketika tidak ada TGR.");
+            return;
+        }
 
         if (!amount || amount <= 0) {
             alert("Masukkan nominal yang valid.");

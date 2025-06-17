@@ -32,7 +32,7 @@
         <div class="d-flex justify-content-between align-items-center" style="padding: 49px 36px;">
             <?php
             $title1 = $active_menu === 'cases' ? 'Daftar Perkara yang terdaftar' : 'Daftar Perkara';
-            $subtitle1 = $active_menu === 'cases' ? '3 Perkara baru saja telah diinput (?)' : 'Daftar Perkara yang dikelola di sistem ini';
+            $subtitle1 = $active_menu === 'cases' ? '' : 'Daftar Perkara yang dikelola di sistem ini';
             ?>
             <div class="d-flex flex-column" style="gap: 14px;">
                 <h2 class="extra-bold-5 text-blue-stone-600"><?= $title1 ?></h2>

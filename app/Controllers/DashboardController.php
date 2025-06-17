@@ -28,6 +28,40 @@ class DashboardController extends BaseController
                 ->getRowArray();
         }
 
+        $casesToday = [];
+        $casesThisWeek = [];
+        if (session('role') === 'operator') {
+            $today = date('Y-m-d');
+            $startOfWeek = date('Y-m-d', strtotime('monday this week'));
+            $endOfWeek = date('Y-m-d', strtotime('sunday this week'));
+
+            foreach ($cases as $case) {
+                $agendas = $caseAgendaModel
+                    ->select('cases.*, case_agendas.*, case_positions.name as case_position_name, case_types.name as case_type_name')
+                    ->join('cases', 'cases.id = case_agendas.case_id')
+                    ->join('case_types', 'case_types.id = cases.case_type_id')
+                    ->join('case_positions', 'case_positions.id = case_agendas.position_id')
+                    ->where('case_id', $case['id'])
+                    ->orderBy('date', 'DESC')
+                    ->get()
+                    ->getResultArray();
+
+                if (sizeof($agendas) > 0) {
+                    foreach ($agendas as $agenda) {
+                        $caseDate = $agenda['date'];
+
+                        if ($caseDate === $today) {
+                            $casesToday[] = $agenda;
+                        }
+
+                        if ($caseDate >= $startOfWeek && $caseDate <= $endOfWeek) {
+                            $casesThisWeek[] = $agenda;
+                        }
+                    }
+                }
+            }
+        }
+
         $data = [
             'page_title' => 'Dashboard',
             'active_menu' => 'dashboard',
@@ -35,7 +69,9 @@ class DashboardController extends BaseController
                 ['title' => 'Home', 'arrow' => true],
                 ['title' => 'Dashboard', 'arrow' => false],
             ],
-            'cases' => $cases
+            'cases' => $cases,
+            'cases_today' => $casesToday,
+            'cases_this_week' => $casesThisWeek
         ];
 
         return view('main/dashboard/index', $data);

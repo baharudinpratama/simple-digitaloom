@@ -53,6 +53,7 @@ class OperatorController extends BaseController
 
         $userModel->insert([
             'username'  => $this->request->getPost('username'),
+            'name' => ucfirst($this->request->getPost('username')),
             'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'role'      => 'operator'
         ]);
