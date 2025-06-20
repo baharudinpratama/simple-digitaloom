@@ -104,4 +104,39 @@ class OperatorController extends BaseController
             ], 200);
         }
     }
+
+    public function updateStatus()
+    {
+        $db = db_connect();
+        $userModel = new UserModel();
+
+        $db->transStart();
+
+
+        if ($this->request->getPost('status') === true) {
+            $userModel->update($this->request->getPost('id'), [
+                'deleted_at'  => null
+            ]);
+        } else {
+            $userModel->update($this->request->getPost('id'), [
+                'deleted_at'  => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        $db->transComplete();
+
+        if ($db->transStatus() === false) {
+            $error = $db->error();
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Simpan data gagal: ' . $error['message'],
+            ], 500);
+        } else {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Simpan data berhasil'
+                // 'data' => $userModel->where('id', $this->request->getPost('id'))->get()->getRowArray()
+            ], 200);
+        }
+    }
 }

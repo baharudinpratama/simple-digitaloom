@@ -10,9 +10,9 @@ class CaseAgendaModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['case_id', 'position_id', 'level', 'date', 'officer', 'outcome'];
+    protected $allowedFields    = ['case_id', 'position_id', 'level', 'date', 'officer', 'outcome', 'decision_number', 'win_lose'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

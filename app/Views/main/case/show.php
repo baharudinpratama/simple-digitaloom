@@ -425,7 +425,6 @@
                             <th>Hasil Beracara / Amar Putusan</th>
                             <th>Menang / Kalah</th>
                             <th>Nomor Putusan</th>
-                            <th>Pertimbangan Hukum</th>
                             <th>Petugas</th>
                             <th>Dokumen</th>
                             <th class="action" width="15%">Aksi</th>
@@ -531,9 +530,8 @@
         <td class="position fw-semibold"></td>
         <td class="level fw-bold"></td>
         <td class="outcome fw-bold"></td>
-        <td class="wl fw-bold">-</td>
-        <td class="ruling-number fw-bold">-</td>
-        <td class="consideration fw-bold">-</td>
+        <td class="wl fw-bold"></td>
+        <td class="decision-number fw-bold"></td>
         <td class="officer fw-bold"></td>
         <td class="doc fw-bold text-start text-truncate"></td>
         <td class="action">
@@ -822,6 +820,11 @@
                     </div>
 
                     <div class="col">
+                        <label for="decision-number" class="form-label" style="margin-bottom: 18px;">Nomor Putusan</label>
+                        <input type="text" class="form-control" id="decision-number" placeholder="Nomor Putusan">
+                    </div>
+
+                    <div class="col">
                         <label for="agenda-date" class="form-label" style="margin-bottom: 18px;">Tanggal Agenda Posisi Perkara</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light">
@@ -832,6 +835,15 @@
                             </span>
                             <input type="date" class="form-control" id="agenda-date">
                         </div>
+                    </div>
+
+                    <div class="col">
+                        <label for="agenda-wl" class="form-label" style="margin-bottom: 18px;">Menang/Kalah</label>
+                        <select class="form-select" id="agenda-wl" aria-label="Select party position">
+                            <option value="" selected>Tidak Ada</option>
+                            <option value="win">Menang</option>
+                            <option value="lose">Kalah</option>
+                        </select>
                     </div>
 
                     <div class="col">
@@ -1648,6 +1660,12 @@
     let agendaFiles = [];
     let deletedAgendaFileIds = [];
 
+    const swithcWl = (choosen) => {
+        if (choosen === "") return choosen;
+        if (choosen === "win") return "Menang";
+        if (choosen === "lose") return "Kalah";
+    }
+
     const getCaseAgenda = () => {
         $.ajax({
             method: "GET",
@@ -1666,12 +1684,11 @@
                             $template.find(".position").text(item.case_position_name);
                             $template.find(".level").text(item.level);
                             $template.find(".outcome").text(item.outcome);
-                            // $template.find(".wl").text();
-                            // $template.find(".ruling-number").text();
-                            // $template.find(".consideration").text();
+                            $template.find(".wl").text(swithcWl(item.win_lose));
+                            $template.find(".decision-number").text(item.decision_number);
                             $template.find(".officer").text(item.officer);
                             item.agenda_files.forEach(file => {
-                                $template.find(".doc").append(`<div>${file.name}</div>`);
+                                $template.find(".doc").append(`<a href="<?= base_url('/uploads/agenda_files/') ?>${file.filename}" target="_blank" class="text-decoration-none">${file.name}</a>`);
                             });
 
                             item.agenda_files.forEach((file, index) => {
@@ -1702,6 +1719,8 @@
                                 $("#agenda-date").val(item.date);
                                 $("#agenda-officer").val(item.officer);
                                 $("#agenda-outcome").val(item.outcome);
+                                $("#decision-number").val(item.decision_number);
+                                $("#agenda-wl").val(item.win_lose);
                                 $(".existing-file").addClass("d-none");
                                 item.agenda_files.forEach(agenda => {
                                     $(`.existing-file[data-agenda-id="${item.id}"]`).removeClass("d-none");
@@ -1836,6 +1855,8 @@
         formData.append("date", $("#agenda-date").val());
         formData.append("officer", $("#agenda-officer").val());
         formData.append("outcome", $("#agenda-outcome").val());
+        formData.append("decisionNumber", $("#decision-number").val());
+        formData.append("winLose", $("#agenda-wl :selected").val());
         if (agendaFiles.length > 0) {
             agendaFiles.forEach((file) => {
                 formData.append("files[]", file);
@@ -1883,6 +1904,8 @@
         formData.append("date", $("#agenda-date").val());
         formData.append("officer", $("#agenda-officer").val());
         formData.append("outcome", $("#agenda-outcome").val());
+        formData.append("decisionNumber", $("#decision-number").val());
+        formData.append("winLose", $("#agenda-wl").val());
         if (agendaFiles.length > 0) {
             agendaFiles.forEach((file) => {
                 formData.append("newFiles[]", file);

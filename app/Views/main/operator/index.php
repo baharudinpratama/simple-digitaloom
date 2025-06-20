@@ -26,7 +26,7 @@
                         <div class="d-flex align-items-center justify-content-center position-relative rounded-circle bg-blue-stone-200" style="width: 65px; height: 65px;">
                             <img src="<?= base_url('/img/online-active.png') ?>" alt="" width="35">
                         </div>
-                        <h3 class="bold-3">Total Akun Operator</h3>
+                        <h3 class="bold-3">Total Operator Aktif</h3>
                     </div>
                     <p style="margin-left: 10px; font-weight: 600; font-size: 18px;"><span style="margin-right: 16px; font-size: 36px;"><?= sizeof($operators) ?></span> Akun</p>
                 </div>
@@ -38,7 +38,7 @@
                         <div class="d-flex align-items-center justify-content-center position-relative rounded-circle bg-blue-stone-200" style="width: 65px; height: 65px;">
                             <img src="<?= base_url('/img/offline-active.png') ?>" alt="" width="35">
                         </div>
-                        <h3 class="bold-3">Total Akun Operator</h3>
+                        <h3 class="bold-3">Total Operator Nonaktif</h3>
                     </div>
                     <p style="margin-left: 10px; font-weight: 600; font-size: 18px;"><span style="margin-right: 16px; font-size: 36px;"><?= sizeof($operators) ?></span> Akun</p>
                 </div>
@@ -83,7 +83,12 @@
                         <td style="height: 94px;"><?= $index + 1 ?></td>
                         <td><?= $operator['username'] ?></td>
                         <td><?= date('d-m-Y', strtotime($operator['created_at'])) ?></td>
-                        <td>-</td>
+                        <td>
+                            <div class="form-check form-switch d-flex justify-content-center align-items-center gap-3">
+                                <input class="form-check-input switch-status" type="checkbox" role="switch" data-id="<?= $operator['id'] ?>" id="switch-status-<?= $operator['id'] ?>" <?= $operator['deleted_at'] === null ? 'checked' : '' ?>>
+                                <label class="form-check-label switch-status" for="switch-status-<?= $operator['id'] ?>"><?= $operator['deleted_at'] === null ? 'Aktif' : 'Nonaktif' ?></label>
+                            </div>
+                        </td>
                         <td class="action fw-bold" style="padding: 22px 0px; font-size: 13px;">
                             <?php if ($active_menu === 'operators') : ?>
                                 <div class="d-flex flex-column align-items-center" style="gap: 10px;">
@@ -104,6 +109,18 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal" id="modal-loading" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="width: 300px; height: 270px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex align-items-center justify-content-center">
+                    <img src="<?= base_url('/img/loading.gif') ?>" alt="loading" width="150">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -139,6 +156,44 @@
             $("th.action").prop("hidden", true);
             $("td.action").prop("hidden", true);
         }
+    });
+
+    const modalLoading = new bootstrap.Modal("#modal-loading");
+
+    $(".switch-status").on("change", function() {
+        const id = $(this).data("id");
+        const checked = this.checked;
+
+        $.ajax({
+            method: "POST",
+            url: "<?= base_url('/operators/update-status') ?>",
+            data: {
+                id: id,
+                status: checked
+            },
+            dataType: "json",
+            beforeSend: function() {
+                modalLoading.show();
+            },
+            complete: function() {
+                modalLoading.hide();
+            },
+            success: function(response) {
+                if (response.success) {
+                    $("#toast-message").text(response.message);
+                    let toast = new bootstrap.Toast('#toast');
+                    toast.show();
+                    
+                    $(`label[for="switch-status-${id}"]`).text(checked === true ? 'Aktif' : 'Nonaktif');
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("AJAX error:", error);
+                alert("Something went wrong.");
+            }
+        });
     });
 </script>
 <?= $this->endSection() ?>

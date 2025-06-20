@@ -51,6 +51,7 @@ $routes->get('/operators', 'OperatorController::index');
 $routes->get('/operators/create', 'OperatorController::create');
 $routes->post('/operators', 'OperatorController::store');
 $routes->post('/operators/update', 'OperatorController::update');
+$routes->post('/operators/update-status', 'OperatorController::updateStatus');
 
 $routes->get('/manage-operators', 'ManageOperatorController::index');
 $routes->get('/manage-operators/(:num)', 'ManageOperatorController::show/$1');

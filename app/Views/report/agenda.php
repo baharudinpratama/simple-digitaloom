@@ -141,8 +141,8 @@
 
     <table style="width: 100%;">
         <tr>
-            <td style="width: 70%; vertical-align: top;"><span style="font-weight: 700;">Tanggal Proses</span> : <?= date('d-m-Y') ?></td>
-            <td style="width: 30%; vertical-align: top;">
+            <td style="width: 75%; vertical-align: top;"><span style="font-weight: 700;">Tanggal Proses</span> : <?= date('d-m-Y') ?></td>
+            <td style="width: 25%; vertical-align: top;">
                 Mengetahui,<br>
                 <strong>Kepala Divisi Advokasi</strong>
             </td>

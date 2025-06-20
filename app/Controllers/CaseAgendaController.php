@@ -41,12 +41,14 @@ class CaseAgendaController extends BaseController
         $db->transStart();
 
         $caseAgendaId = $caseAgendaModel->insert([
-            'case_id'       => $this->request->getPost('caseId'),
-            'position_id'   => $this->request->getPost('positionId'),
-            'level'         => $this->request->getPost('level'),
-            'date'          => $this->request->getPost('date'),
-            'officer'       => $this->request->getPost('officer'),
-            'outcome'       => $this->request->getPost('outcome')
+            'case_id'           => $this->request->getPost('caseId'),
+            'position_id'       => $this->request->getPost('positionId'),
+            'level'             => $this->request->getPost('level'),
+            'date'              => $this->request->getPost('date'),
+            'officer'           => $this->request->getPost('officer'),
+            'outcome'           => $this->request->getPost('outcome'),
+            'decision_number'   => $this->request->getPost('decisionNumber'),
+            'win_lose'          => $this->request->getPost('winLose')
         ]);
 
         $files = $this->request->getFiles();
@@ -100,12 +102,14 @@ class CaseAgendaController extends BaseController
         $db->transStart();
 
         $caseAgendaModel->update($this->request->getPost('id'), [
-            'case_id'       => $this->request->getPost('caseId'),
-            'position_id'   => $this->request->getPost('positionId'),
-            'level'         => $this->request->getPost('level'),
-            'date'          => $this->request->getPost('date'),
-            'officer'       => $this->request->getPost('officer'),
-            'outcome'       => $this->request->getPost('outcome')
+            'case_id'           => $this->request->getPost('caseId'),
+            'position_id'       => $this->request->getPost('positionId'),
+            'level'             => $this->request->getPost('level'),
+            'date'              => $this->request->getPost('date'),
+            'officer'           => $this->request->getPost('officer'),
+            'outcome'           => $this->request->getPost('outcome'),
+            'decision_number'   => $this->request->getPost('decisionNumber'),
+            'win_lose'          => $this->request->getPost('winLose')
         ]);
 
         $deletedIds = $this->request->getPost('deletedFileIds');

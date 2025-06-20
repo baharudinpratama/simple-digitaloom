@@ -77,10 +77,15 @@
                                         Lihat Detail
                                     </a>
                                     <?php if (session()->get('role') === 'operator') : ?>
-                                        <a href="<?= base_url('/cases/' . $case['id']) ?>" class="d-inline-flex w-75 justify-content-center align-items-center bg-blue-stone-800" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
-                                            <img src="<?= base_url('/img/file-download.png') ?>" alt="file-download" style="margin-right: 5px;" width="15">
-                                            Download Resume
-                                        </a>
+                                        <form action="<?= base_url('/reports/agenda') ?>" method="post" target="_blank">
+                                            <div class="d-flex w-100">
+                                                <input type="hidden" name="caseId" value="<?= $case['id'] ?>">
+                                                <button type="submit" class="d-inline-flex justify-content-center align-items-center border-0 bg-blue-stone-800" style="padding: 10px; border-radius: 5px; color: white; text-decoration: none; line-height: normal;">
+                                                    <img src="<?= base_url('/img/file-download.png') ?>" alt="file-download" style="margin-right: 5px;" width="15">
+                                                    Download Resume
+                                                </button>
+                                            </div>
+                                        </form>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
@@ -215,7 +220,7 @@
             },
             success: function(response) {
                 if (response.success) {
-                   location.reload();
+                    location.reload();
                 } else {
                     alert(response.message);
                 }

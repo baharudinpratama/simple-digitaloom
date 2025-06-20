@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 20, 2025 at 12:16 AM
+-- Generation Time: Jun 20, 2025 at 10:21 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -109,7 +109,7 @@ INSERT INTO `cases` (`id`, `case_number`, `case_type_id`, `province_id`, `court_
 (16, '81/Pdt.G/2025/PN.Sby', 2, 16, 1, 'PN Surabaya', '2025-05-11', '-', 2, '-', 0, 2, '2025-05-10 18:50:49', '2025-05-10 18:50:49', NULL),
 (17, '82/Pdt.G/2025/PN.Sby', 4, 16, 1, 'PN Surabaya', '2025-05-15', '-', 1, '-', 0, 2, '2025-05-10 18:52:48', '2025-05-10 18:52:48', NULL),
 (19, '1', 1, 1, 1, 'PN Surabaya', '2025-06-02', '-', 1, '-', 0, 2, '2025-06-02 14:55:31', '2025-06-02 14:55:31', NULL),
-(20, '2', 2, 11, NULL, 'PN Jakarta', '2025-06-19', '-', 2, '-', 0, 2, '2025-06-02 15:06:04', '2025-06-02 15:06:04', NULL);
+(20, '2', 2, 11, NULL, 'PN Jakarta', '2025-06-03', '-', 2, '-', 0, 2, '2025-06-02 15:06:04', '2025-06-02 15:06:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -124,17 +124,19 @@ CREATE TABLE `case_agendas` (
   `level` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `officer` varchar(100) DEFAULT NULL,
-  `outcome` varchar(255) DEFAULT NULL
+  `outcome` varchar(255) DEFAULT NULL,
+  `decision_number` varchar(100) NOT NULL DEFAULT '',
+  `win_lose` enum('','win','lose') NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `case_agendas`
 --
 
-INSERT INTO `case_agendas` (`id`, `case_id`, `position_id`, `level`, `date`, `officer`, `outcome`) VALUES
-(3, 10, 1, 'PN', '2025-06-02', 'Hakim', '-'),
-(4, 10, 2, 'PN', '2025-06-03', 'Pengawas', '-'),
-(6, 10, 8, 'PN', '2025-06-19', 'Agus', '-');
+INSERT INTO `case_agendas` (`id`, `case_id`, `position_id`, `level`, `date`, `officer`, `outcome`, `decision_number`, `win_lose`) VALUES
+(3, 10, 1, 'PN', '2025-06-16', 'Hakim', '-', '', ''),
+(4, 10, 2, 'PN', '2025-06-17', 'Pengawas', '-', '', ''),
+(6, 10, 8, 'PN', '2025-06-20', 'Agus', '-', '', '');
 
 -- --------------------------------------------------------
 
@@ -215,7 +217,7 @@ CREATE TABLE `case_parties` (
   `case_id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `unit_id` int DEFAULT NULL,
-  `position` enum('Penggugat','Tergugat','Turut Tergugat') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `position` enum('Penggugat','Tergugat','Saksi','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `address` text,
   `order` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -376,10 +378,10 @@ INSERT INTO `doc_types` (`id`, `name`) VALUES
 
 CREATE TABLE `migrations` (
   `id` bigint UNSIGNED NOT NULL,
-  `version` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `class` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `group` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `namespace` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `class` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namespace` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `time` int NOT NULL,
   `batch` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -475,9 +477,9 @@ INSERT INTO `provinces` (`id`, `name`) VALUES
 CREATE TABLE `users` (
   `id` int UNSIGNED NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `role` enum('admin','operator') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'operator',
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `role` enum('admin','operator') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'operator',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
@@ -489,8 +491,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `role`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Admin', 'admin', '$2y$12$q5kFpCgi69k4Adxt0FcHB..NKkIDxwS/ukW6pe.54ibU0aub2IVo.', 'admin', '2025-05-05 16:14:40', NULL, NULL),
-(2, 'Operator', 'operator', '$2y$12$qAo1ZrT2znXjf5QfctJzaOcC.U9uGvCoDIJ3Ivo.B3E8Ijb66tRx.', 'operator', '2025-05-05 16:14:40', '2025-05-18 07:40:33', NULL),
-(3, NULL, 'op', '$2y$12$8mRxi40O5zyYhw/u0r34ueYjhzObZ.JZCT3mMVXenUFMCLJ5MI8ku', 'operator', '2025-05-15 15:57:52', '2025-05-15 15:57:52', NULL);
+(2, 'Operator', 'operator', '$2y$12$qAo1ZrT2znXjf5QfctJzaOcC.U9uGvCoDIJ3Ivo.B3E8Ijb66tRx.', 'operator', '2025-05-05 16:14:40', '2025-06-20 10:20:52', '2025-06-20 10:20:52'),
+(5, 'Wibisono', 'wibisono', '$2y$10$aePY9KX68xMiq7taaZiFmOFE6qyaTj1NbdlsbKqdL7bRTYkIYazLi', 'operator', '2025-06-20 09:54:10', '2025-06-20 10:20:46', '2025-06-20 10:20:46');
 
 --
 -- Indexes for dumped tables
@@ -714,7 +716,7 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
