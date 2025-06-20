@@ -624,8 +624,8 @@
                     </div>
 
                     <div class="col">
-                        <label for="asset-owner" class="form-label" style="margin-bottom: 18px;">Nama Pihak Pengguna</label>
-                        <input type="text" class="form-control" id="asset-owner" placeholder="Nama Pemilik Aset">
+                        <label for="asset-owner" class="form-label" style="margin-bottom: 18px;">Nama Dokumen Pemilik</label>
+                        <input type="text" class="form-control" id="asset-owner" placeholder="Nama Dokumen Pemilik">
                     </div>
                 </div>
             </div>

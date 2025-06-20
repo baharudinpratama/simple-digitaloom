@@ -45,7 +45,7 @@
     <div class="sidebar-header d-flex align-items-center">
         <img src="<?= base_url('/img/logo.png') ?>" class="img-fluid" alt="logo" style="width: 10rem;">
 
-        <h1 class="fw-bold text-blue-stone-600" style="font-size: 1.5rem;">SIMPLE</h1>
+        <h1 class="fw-bold text-blue-stone-600" style="font-size: 1.5rem;">SIMPEL</h1>
     </div>
 
     <div class="menu extra-bold-2">

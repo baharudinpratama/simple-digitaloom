@@ -144,7 +144,7 @@
             <td style="width: 70%; vertical-align: top;"><span style="font-weight: 700;">Tanggal Proses</span> : <?= date('d-m-Y') ?></td>
             <td style="width: 30%; vertical-align: top;">
                 Mengetahui,<br>
-                <strong>Kepala Divisi Administrasi Tanah dan Litigasi</strong>
+                <strong>Kepala Divisi Advokasi</strong>
             </td>
         </tr>
     </table>
