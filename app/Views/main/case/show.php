@@ -305,7 +305,7 @@
                             <th>Jenis Aset</th>
                             <th>Lokasi Aset</th>
                             <th>Bukti Kepemilikan</th>
-                            <th>Pengguna</th>
+                            <th>Atas Nama</th>
                             <th class="action" width="15%">Aksi</th>
                         </tr>
                     </thead>
@@ -622,8 +622,8 @@
                     </div>
 
                     <div class="col">
-                        <label for="asset-owner" class="form-label" style="margin-bottom: 18px;">Nama Dokumen Pemilik</label>
-                        <input type="text" class="form-control" id="asset-owner" placeholder="Nama Dokumen Pemilik">
+                        <label for="asset-owner" class="form-label" style="margin-bottom: 18px;">Atas Nama</label>
+                        <input type="text" class="form-control" id="asset-owner" placeholder="Atas Nama Aset">
                     </div>
                 </div>
             </div>
@@ -742,7 +742,7 @@
 
                     <div class="col">
                         <label for="object-area" class="form-label" style="margin-bottom: 18px;">Luas Tanah/Luas Bangunan</label>
-                        <input type="number" class="form-control" id="object-area" placeholder="Masukkan Luas Tanah/LB, contoh: 1251">
+                        <input type="number" class="form-control" id="object-area" placeholder="contoh: 1251">
                     </div>
 
                     <div class="col">
@@ -756,7 +756,7 @@
 
                     <div class="col">
                         <label for="object-owner" class="form-label" style="margin-bottom: 18px;">Atas Nama</label>
-                        <input type="text" class="form-control" id="object-owner" placeholder="Nama Pemilik Aset terkait">
+                        <input type="text" class="form-control" id="object-owner" placeholder="Atas Nama Aset Terkait">
                     </div>
 
                     <div class="col-12">
