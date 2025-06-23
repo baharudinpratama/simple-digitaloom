@@ -73,7 +73,7 @@
                                             </div>
 
                                             <div class="d-flex flex-column" style="gap: 14px;">
-                                                <h3 class="extra-bold-5 color-text">Agenda Perkara : <?= $case_today['last_agenda']['case_position_name'] ?? 'Input Baru' ?></h3>
+                                                <h3 class="extra-bold-5 color-text">Agenda Perkara : <?= $case_today['case_position_name'] ?? 'Input Baru' ?></h3>
 
                                                 <div class="d-flex align-items-center regular-2" style="gap: 16px;">
                                                     <p>No. Perkara : <span class="bold-2"><?= $case_today['case_number'] ?></span></p>
@@ -83,7 +83,7 @@
                                         </div>
 
                                         <div class="d-flex align-items-center regular-1 color-text" style="gap: 83px;">
-                                            <p>Tanggal Agenda : <span class="bold-3"><?= date('d-m-Y', strtotime($case_today['date'])) ?></span></p>
+                                            <p>Tanggal Agenda : <span class="bold-3"><?= date('d-m-Y', strtotime($case_today['date'] ?? $case_today['case_date'] )) ?></span></p>
                                             <p>Lokasi Peradilan : <span class="bold-3"><?= $case_today['court_name'] ?></span></p>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                         </div>
 
                                         <div class="d-flex align-items-center regular-1 color-text" style="gap: 83px;">
-                                            <p>Tanggal Agenda : <span class="bold-3"><?= date('d-m-Y', strtotime($case_this_week['date'])) ?></span></p>
+                                            <p>Tanggal Agenda : <span class="bold-3"><?= date('d-m-Y', strtotime($case_this_week['date'] ?? $case_this_week['case_date'])) ?></span></p>
                                             <p>Lokasi Peradilan : <span class="bold-3"><?= $case_this_week['court_name'] ?></span></p>
                                         </div>
                                     </div>

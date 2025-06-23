@@ -19,8 +19,8 @@ class DashboardController extends BaseController
             ->join('case_types', 'case_types.id = cases.case_type_id')
             ->get()
             ->getResultArray();
-        foreach ($cases as &$case) {
-            $case['last_agenda'] = $caseAgendaModel->select('case_agendas.*, case_positions.name as case_position_name')
+        foreach ($cases as $index => $case) {
+            $cases[$index]['last_agenda'] = $caseAgendaModel->select('case_agendas.*, case_positions.name as case_position_name')
                 ->join('case_positions', 'case_positions.id = case_agendas.position_id')
                 ->where('case_id', $case['id'])
                 ->orderBy('date', 'DESC')
@@ -36,6 +36,16 @@ class DashboardController extends BaseController
             $endOfWeek = date('Y-m-d', strtotime('sunday this week'));
 
             foreach ($cases as $case) {
+                $caseDate = $case['case_date'];
+
+                if ($caseDate === $today) {
+                    $casesToday[] = $case;
+                }
+
+                if ($caseDate >= $startOfWeek && $caseDate <= $endOfWeek) {
+                    $casesThisWeek[] = $case;
+                }
+
                 $agendas = $caseAgendaModel
                     ->select('cases.*, case_agendas.*, case_positions.name as case_position_name, case_types.name as case_type_name')
                     ->join('cases', 'cases.id = case_agendas.case_id')
@@ -48,19 +58,21 @@ class DashboardController extends BaseController
 
                 if (sizeof($agendas) > 0) {
                     foreach ($agendas as $agenda) {
-                        $caseDate = $agenda['date'];
+                        $agendaDate = $agenda['date'];
 
-                        if ($caseDate === $today) {
+                        if ($agendaDate === $today) {
                             $casesToday[] = $agenda;
                         }
 
-                        if ($caseDate >= $startOfWeek && $caseDate <= $endOfWeek) {
+                        if ($agendaDate >= $startOfWeek && $agendaDate <= $endOfWeek) {
                             $casesThisWeek[] = $agenda;
                         }
                     }
                 }
             }
         }
+
+        // dd($casesThisWeek[0]['case_position_name']);
 
         $data = [
             'page_title' => 'Dashboard',
