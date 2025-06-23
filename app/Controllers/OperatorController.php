@@ -12,7 +12,16 @@ class OperatorController extends BaseController
     {
         $userModel = new UserModel();
 
+        $operatorActiveCount = 0;
+        $operatorInactiveCount = 0;
         $operators = $userModel->where('role', 'operator')->get()->getResultArray();
+        foreach($operators as $operator) {
+            if ($operator['deleted_at'] !== null) {
+                $operatorActiveCount++;
+            } else {
+                $operatorInactiveCount++;
+            }
+        }
 
         $data = [
             'page_title' => 'Daftar Akun',
@@ -22,7 +31,9 @@ class OperatorController extends BaseController
                 ['title' => 'Daftar Akun Operator', 'arrow' => false],
             ],
             'session' => session(),
-            'operators' => $operators
+            'operators' => $operators,
+            'operator_active_count' => $operatorActiveCount,
+            'operator_inactive_count' => $operatorInactiveCount
         ];
 
         return view('main/operator/index', $data);
@@ -112,8 +123,7 @@ class OperatorController extends BaseController
 
         $db->transStart();
 
-
-        if ($this->request->getPost('status') === true) {
+        if ($this->request->getPost('status') === 'true') {
             $userModel->update($this->request->getPost('id'), [
                 'deleted_at'  => null
             ]);

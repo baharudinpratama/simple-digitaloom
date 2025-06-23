@@ -28,7 +28,7 @@
                         </div>
                         <h3 class="bold-3">Total Operator Aktif</h3>
                     </div>
-                    <p style="margin-left: 10px; font-weight: 600; font-size: 18px;"><span style="margin-right: 16px; font-size: 36px;"><?= sizeof($operators) ?></span> Akun</p>
+                    <p style="margin-left: 10px; font-weight: 600; font-size: 18px;"><span id="operator-active-count" style="margin-right: 16px; font-size: 36px;"><?= $operator_active_count ?></span> Akun</p>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
                         </div>
                         <h3 class="bold-3">Total Operator Nonaktif</h3>
                     </div>
-                    <p style="margin-left: 10px; font-weight: 600; font-size: 18px;"><span style="margin-right: 16px; font-size: 36px;"><?= sizeof($operators) ?></span> Akun</p>
+                    <p style="margin-left: 10px; font-weight: 600; font-size: 18px;"><span id="operator-inactive-count" style="margin-right: 16px; font-size: 36px;"><?= $operator_inactive_count ?></span> Akun</p>
                 </div>
             </div>
         </div>
@@ -84,10 +84,15 @@
                         <td><?= $operator['username'] ?></td>
                         <td><?= date('d-m-Y', strtotime($operator['created_at'])) ?></td>
                         <td>
-                            <div class="form-check form-switch d-flex justify-content-center align-items-center gap-3">
-                                <input class="form-check-input switch-status" type="checkbox" role="switch" data-id="<?= $operator['id'] ?>" id="switch-status-<?= $operator['id'] ?>" <?= $operator['deleted_at'] === null ? 'checked' : '' ?>>
-                                <label class="form-check-label switch-status" for="switch-status-<?= $operator['id'] ?>"><?= $operator['deleted_at'] === null ? 'Aktif' : 'Nonaktif' ?></label>
-                            </div>
+                            <?php if ($active_menu === 'operators') : ?>
+                                <div class="form-check form-switch d-flex justify-content-center align-items-center gap-3">
+                                    <input class="form-check-input switch-status" type="checkbox" role="switch" data-id="<?= $operator['id'] ?>" id="switch-status-<?= $operator['id'] ?>" <?= $operator['deleted_at'] === null ? 'checked' : '' ?>>
+                                    <label class="form-check-label switch-status" for="switch-status-<?= $operator['id'] ?>"><?= $operator['deleted_at'] === null ? 'Aktif' : 'Nonaktif' ?></label>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($active_menu === 'manage_operators') : ?>
+                                <?= $operator['deleted_at'] === null ? 'Aktif' : 'Nonaktif' ?>
+                            <?php endif; ?>
                         </td>
                         <td class="action fw-bold" style="padding: 22px 0px; font-size: 13px;">
                             <?php if ($active_menu === 'operators') : ?>
@@ -160,6 +165,18 @@
 
     const modalLoading = new bootstrap.Modal("#modal-loading");
 
+    const handleOperatorCount = () => {
+        let active = 0;
+        let inactive = 0;
+        $("table input.switch-status").each((index, item) => {
+            item.checked ? active++ : inactive++;
+        });
+        $("#operator-active-count").text(active);
+        $("#operator-inactive-count").text(inactive);
+    }
+
+    handleOperatorCount();
+
     $(".switch-status").on("change", function() {
         const id = $(this).data("id");
         const checked = this.checked;
@@ -183,8 +200,9 @@
                     $("#toast-message").text(response.message);
                     let toast = new bootstrap.Toast('#toast');
                     toast.show();
-                    
+
                     $(`label[for="switch-status-${id}"]`).text(checked === true ? 'Aktif' : 'Nonaktif');
+                    handleOperatorCount();
                 } else {
                     alert(response.message);
                 }

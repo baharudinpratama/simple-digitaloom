@@ -21,6 +21,14 @@ class AuthController extends BaseController
         $password = $this->request->getPost('password');
 
         $user = $model->where('username', $username)->first();
+
+        if ($user['deleted_at'] !== null) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Akun anda tidak aktif.'
+            ]);
+        }
+
         if ($user && password_verify($password, $user['password'])) {
             session()->set([
                 'is_logged_in' => true,
