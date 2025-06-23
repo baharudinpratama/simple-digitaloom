@@ -59,3 +59,4 @@ $routes->get('/manage-operators/(:num)', 'ManageOperatorController::show/$1');
 // Report
 $routes->get('/reports', 'ReportController::index');
 $routes->post('/reports/agenda', 'ReportController::agenda');
+$routes->get('/reports/download', 'ReportController::download');

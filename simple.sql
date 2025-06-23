@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 20, 2025 at 10:21 AM
+-- Generation Time: Jun 23, 2025 at 12:45 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -109,7 +109,7 @@ INSERT INTO `cases` (`id`, `case_number`, `case_type_id`, `province_id`, `court_
 (16, '81/Pdt.G/2025/PN.Sby', 2, 16, 1, 'PN Surabaya', '2025-05-11', '-', 2, '-', 0, 2, '2025-05-10 18:50:49', '2025-05-10 18:50:49', NULL),
 (17, '82/Pdt.G/2025/PN.Sby', 4, 16, 1, 'PN Surabaya', '2025-05-15', '-', 1, '-', 0, 2, '2025-05-10 18:52:48', '2025-05-10 18:52:48', NULL),
 (19, '1', 1, 1, 1, 'PN Surabaya', '2025-06-02', '-', 1, '-', 0, 2, '2025-06-02 14:55:31', '2025-06-02 14:55:31', NULL),
-(20, '2', 2, 11, NULL, 'PN Jakarta', '2025-06-03', '-', 2, '-', 0, 2, '2025-06-02 15:06:04', '2025-06-02 15:06:04', NULL);
+(20, 'tgl-20', 2, 11, NULL, 'PN Tgl 20', '2025-06-20', '-', 2, '-', 0, 2, '2025-06-02 15:06:04', '2025-06-02 15:06:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -134,8 +134,8 @@ CREATE TABLE `case_agendas` (
 --
 
 INSERT INTO `case_agendas` (`id`, `case_id`, `position_id`, `level`, `date`, `officer`, `outcome`, `decision_number`, `win_lose`) VALUES
-(3, 10, 1, 'PN', '2025-06-16', 'Hakim', '-', '', ''),
-(4, 10, 2, 'PN', '2025-06-17', 'Pengawas', '-', '', ''),
+(3, 10, 1, 'PN', '2025-06-13', 'Hakim', '-', '', ''),
+(4, 10, 2, 'PN', '2025-06-18', 'Pengawas', '-', '', ''),
 (6, 10, 8, 'PN', '2025-06-20', 'Agus', '-', '', '');
 
 -- --------------------------------------------------------
@@ -491,8 +491,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `role`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Admin', 'admin', '$2y$12$q5kFpCgi69k4Adxt0FcHB..NKkIDxwS/ukW6pe.54ibU0aub2IVo.', 'admin', '2025-05-05 16:14:40', NULL, NULL),
-(2, 'Operator', 'operator', '$2y$12$qAo1ZrT2znXjf5QfctJzaOcC.U9uGvCoDIJ3Ivo.B3E8Ijb66tRx.', 'operator', '2025-05-05 16:14:40', '2025-06-20 10:20:52', '2025-06-20 10:20:52'),
-(5, 'Wibisono', 'wibisono', '$2y$10$aePY9KX68xMiq7taaZiFmOFE6qyaTj1NbdlsbKqdL7bRTYkIYazLi', 'operator', '2025-06-20 09:54:10', '2025-06-20 10:20:46', '2025-06-20 10:20:46');
+(2, 'Operator', 'operator', '$2y$12$qAo1ZrT2znXjf5QfctJzaOcC.U9uGvCoDIJ3Ivo.B3E8Ijb66tRx.', 'operator', '2025-05-05 16:14:40', '2025-06-20 12:58:28', NULL),
+(5, 'Tama', 'tama', '$2y$10$aePY9KX68xMiq7taaZiFmOFE6qyaTj1NbdlsbKqdL7bRTYkIYazLi', 'operator', '2025-06-20 09:54:10', '2025-06-20 12:49:43', NULL);
 
 --
 -- Indexes for dumped tables

@@ -101,4 +101,39 @@ class ReportController extends BaseController
         $dompdf->render();
         $dompdf->stream("report-agenda-" . $data['caseId'] . ".pdf", ["Attachment" => false]);
     }
+
+    public function download()
+    {
+        $caseModel = new CaseModel();
+        $caseAgendaModel = new CaseAgendaModel();
+
+        $logoPath = FCPATH . 'img/logo.png';
+        $logoData = base64_encode(file_get_contents($logoPath));
+        $logoMime = mime_content_type($logoPath);
+        $logoSrc = 'data:' . $logoMime . ';base64,' . $logoData;
+
+        $data['logo'] = $logoSrc;
+
+        $data['cases'] = $caseModel
+            ->select('cases.*, case_types.name as case_type_name, case_subjects.name as case_subject_name, users.name as pic_name')
+            ->join('case_types', 'case_types.id = cases.case_type_id')
+            ->join('case_subjects', 'case_subjects.id = cases.case_subject_id')
+            ->join('users', 'users.id = cases.pic')
+            ->get()
+            ->getResultArray();
+        foreach ($data['cases'] as &$case) {
+            $case['last_agenda'] = $caseAgendaModel->select('case_agendas.*, case_positions.name as case_position_name')
+                ->join('case_positions', 'case_positions.id = case_agendas.position_id')
+                ->where('case_id', $case['id'])
+                ->orderBy('date', 'DESC')
+                ->get()
+                ->getRowArray();
+        }
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('report/download', $data));
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream("report-download.pdf", ["Attachment" => false]);
+    }
 }
