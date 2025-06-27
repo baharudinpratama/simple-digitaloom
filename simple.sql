@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 23, 2025 at 12:45 PM
+-- Generation Time: Jun 27, 2025 at 01:55 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -217,7 +217,7 @@ CREATE TABLE `case_parties` (
   `case_id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `unit_id` int DEFAULT NULL,
-  `position` enum('Penggugat','Tergugat','Saksi','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `position` enum('Penggugat','Tergugat','Turut Tergugat','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `address` text,
   `order` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
