@@ -175,9 +175,9 @@
             Simpan Data
         </button>
 
-        <button class="text-blue-stone-600" id="save" style="min-width: 117px; min-height: 43px; padding: 12px 4px; border-radius: 5px; border: 2px solid var(--blue-stone-600); background-color: white;">
+        <a href="<?= base_url('/cases') ?>" class="btn bg-white text-blue-stone-600" style="min-width: 117px; min-height: 43px; padding: 12px 4px; border-radius: 5px; border: 2px solid var(--blue-stone-600); background-color: white;">
             Batal
-        </button>
+        </a>
     </div>
 </div>
 
