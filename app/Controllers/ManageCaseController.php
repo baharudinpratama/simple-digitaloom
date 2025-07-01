@@ -102,8 +102,7 @@ class ManageCaseController extends BaseController
         $caseModel->update($this->request->getPost('id'), [
             'case_date'             => $this->request->getPost('caseDate'),
             'case_description'      => $this->request->getPost('caseDescription'),
-            'compensation_claim'    => $this->request->getPost('compensationClaim'),
-            'pic'                   => session()->get('id')
+            'compensation_claim'    => $this->request->getPost('compensationClaim')
         ]);
 
         $existingClaims = $caseClaimModel->where('case_id', $this->request->getPost('id'))->get()->getResultArray();

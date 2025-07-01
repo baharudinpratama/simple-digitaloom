@@ -266,7 +266,7 @@
                         <div class="row" style="--bs-gutter-x: 70px; --bs-gutter-y: 40px;">
                             <div class="col">
                                 <label for="pic" class="form-label" style="margin-bottom: 18px;">PIC / Penanggung Jawab Data Perkara</label>
-                                <input type="text" class="form-control fw-bold" style="padding: 15px 20px;" id="pic" value="<?= session()->name ?>" disabled>
+                                <input type="text" class="form-control fw-bold" style="padding: 15px 20px;" id="pic" value="<?= $cases['pic_name'] ?? session()->name ?>" disabled>
                             </div>
                         </div>
                     </div>
