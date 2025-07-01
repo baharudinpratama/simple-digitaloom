@@ -860,8 +860,8 @@
                         <label for="agenda-doc" class="form-label" style="margin-bottom: 18px;">Upload Dokumen</label>
                         <div class="d-flex w-100 flex-column align-items-center justify-content-between" style="height: 250px; margin-bottom: 18px; padding: 30px; gap: 20px; border-radius: var(--bs-border-radius); border: 1px solid var(--bs-border-color)">
                             <img src="<?= base_url('/img/upload.png') ?>" alt="upload" width="46">
-                            <div class="d-flex flex-column" style="gap: 10px;">
-                                <p class="fw-bold">Upload dokumen perkara dalam bentuk PDF dengan ukuran Maks 5Mb</p>
+                            <div class="d-flex flex-column align-items-center" style="gap: 10px;">
+                                <p class="fw-bold">Upload dokumen perkara dengan ukuran Maks 5Mb</p>
                                 <p class="fw-bold color-1" style="font-size: 13px;">Pastikan dokumen terlihat dengan jelas dan sah (memiliki tanda tangan/pengesahan resmi)</p>
                             </div>
                             <div role="button" id="agenda-doc-btn" class="text-center bg-blue-stone-600" style="min-width: 155px; padding: 10px; border-radius: 5px; border: 3px solid var(--blue-stone-600); color: white;">
@@ -1829,6 +1829,14 @@
 
     $("#agenda-doc").on("change", function(event) {
         const files = Array.from(event.target.files);
+
+        for (file of files) {
+            console.log(file.size/1024)
+            if (file.size/1024 > 5000) {
+                return alert("Ditemukan file lebih dari 5MB");
+            }
+        }
+
         agendaFiles = [...agendaFiles, ...files];
 
         renderFileList();
