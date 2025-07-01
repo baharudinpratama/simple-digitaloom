@@ -22,6 +22,13 @@ class AuthController extends BaseController
 
         $user = $model->where('username', $username)->first();
 
+        if (!$user) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Username tidak ditemukan.'
+            ]);
+        }
+
         if ($user['deleted_at'] !== null) {
             return $this->response->setJSON([
                 'success' => false,
@@ -44,7 +51,7 @@ class AuthController extends BaseController
         } else {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Username atau password salah.'
+                'message' => 'Password salah.'
             ]);
         }
     }
