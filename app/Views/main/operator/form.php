@@ -120,6 +120,18 @@
     });
 
     $("#save").on("click", function() {
+        if ($("#password").val() === "") {
+            return alert("Input password");
+        }
+
+        if ($("#password-confirm").val() === "") {
+            return alert("Input konfirmasi password");
+        }
+
+        if ($("#password").val() !== $("#password-confirm").val()) {
+            return alert("Password tidak sama");
+        }
+
         $.ajax({
             method: "POST",
             url: "<?= base_url('/operators') ?><?= $method === 'update' ? '/update' : '' ?>",
@@ -138,9 +150,6 @@
             success: function(response) {
                 if (response.success) {
                     window.location.href = "/operators";
-                    // $("#toast-message").text(response.message);
-                    // let toast = new bootstrap.Toast('#toast');
-                    // toast.show();
                 } else {
                     alert(response.message);
                 }
